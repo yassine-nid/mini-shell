@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/13 14:15:16 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/13 14:33:57 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -34,7 +35,7 @@ typedef struct s_env
 typedef enum s_type
 {
 	WORD,
-	SPACE,
+	W_SPACE,
 	PIPE,
 	OR,
 	AND,
@@ -44,7 +45,7 @@ typedef enum s_type
 	RED_AP_OUT,
 	H_DOC,
 	OPEN_PAR,
-	CLOSE_PAR,
+	CLOSE_PAR
 }	t_type;
 
 typedef struct s_token
