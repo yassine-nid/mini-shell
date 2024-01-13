@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/01/12 16:28:17 by yzirri           ###   ########.fr        #
+#    Updated: 2024/01/13 10:39:31 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,26 +47,26 @@ OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -lreadline
+	$(CC) $(CFLAGS) $(OBJ) -lreadline -L ~/.brew/opt/readline/lib -o $(NAME)
 
 # -----------------------------------------
 #	Mandatory Creating Object Files
 # -----------------------------------------
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(UTILS_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(CLEANUP_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(READER_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 clean:
 	@rm -f $(OBJ)

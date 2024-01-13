@@ -6,20 +6,24 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:08:16 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/12 16:28:31 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/13 10:53:58 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	sigint_count;
 
 static void	handle_signal(int sig, siginfo_t *info, void *context)
 {
 	(void)context;
 	(void)info;
 	if (sig == SIGINT)
-		sigint_count++;
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 1);
+        rl_on_new_line();
+        rl_redisplay();
+	}
 }
 
 static int	register_signal(int sig)
@@ -34,6 +38,9 @@ static int	register_signal(int sig)
 
 void	listen_to_signals(t_mini *mini)
 {
+	rl_catch_signals = 0;
 	if (register_signal(SIGINT) == -1)
+		clean_exit(mini, "sigaction error");
+	if (register_signal(SIGQUIT) == -1)
 		clean_exit(mini, "sigaction error");
 }
