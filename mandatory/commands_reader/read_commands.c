@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/13 10:55:35 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/13 11:04:58 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ static void	new_prompt(t_mini *mini)
 	char *inpt = readline("minishell:$ ");
 	if (inpt == NULL)
 		clean_exit(mini, "test");
-	printf("%s", inpt);
+	if (inpt[0] != '\0')
+	{
+		printf("%s\n", inpt);
+		add_history(inpt);
+	}
 	free(inpt);
 	inpt = NULL;
 }

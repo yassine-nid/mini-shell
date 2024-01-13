@@ -6,12 +6,11 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:08:16 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/13 10:53:58 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/13 11:00:34 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 static void	handle_signal(int sig, siginfo_t *info, void *context)
 {

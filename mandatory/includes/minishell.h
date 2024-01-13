@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/13 08:58:28 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/13 14:15:16 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,34 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef enum s_type
+{
+	WORD,
+	SPACE,
+	PIPE,
+	OR,
+	AND,
+	AMPERSAND,
+	RED_IN,
+	RED_OUT,
+	RED_AP_OUT,
+	H_DOC,
+	OPEN_PAR,
+	CLOSE_PAR,
+}	t_type;
+
+typedef struct s_token
+{
+	char			*word;
+	t_type			type;
+	struct s_token	*preveus;
+	struct s_token	*next;
+}	t_token;
+
 typedef struct s_mini
 {
 	t_env			**env;
+	t_token			**token;
 }	t_mini;
 
 void	main_init(t_mini *mini, char *env[]);
