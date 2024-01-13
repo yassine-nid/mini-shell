@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/13 14:33:57 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/13 15:28:51 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ typedef struct s_env
 
 typedef enum s_type
 {
-	WORD,
-	W_SPACE,
-	PIPE,
-	OR,
-	AND,
-	AMPERSAND,
-	RED_IN,
-	RED_OUT,
-	RED_AP_OUT,
-	H_DOC,
-	OPEN_PAR,
-	CLOSE_PAR
+	WORD,		// anything else
+	W_SPACE,	// isspace(3)
+	PIPE,		// |
+	OR,			// ||
+	AND,		// &&
+	AMPERSAND,	// &
+	RED_IN,		// redirect input <
+	RED_OUT,	// redirect ouput >
+	RED_AP_OUT,	// redirect append output >>
+	H_DOC,		// herdoc <<
+	OPEN_PAR,	// (
+	CLOSE_PAR	// )
 }	t_type;
 
 typedef struct s_token
@@ -77,9 +77,11 @@ char	*ft_strdup(const char *s1);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 // ########## Cleanup #########
-void	clean_exit(t_mini *mini, char *error);
+void	clean_exit(t_mini *mini, char *error, int code);
+void	clean_exit_no(t_mini *mini, int code);
 
 // ######### Commands reader #########
 void	read_commands(t_mini *mini);
+t_token	*token_new(t_mini *mini, t_type type, char *word);
 
 #endif
