@@ -6,58 +6,65 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/13 14:41:53 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/14 18:21:38 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static bool is_delimiter(char *line, t_type *delimiter)
+static void	init_token(t_mini *mini)
 {
-	if (*line == '|' && *(line++) == '|')
-		return (*delimiter = OR, true);
-	if (*line == '|')
-		return (*delimiter = PIPE, true);
-	return (false);
+	token_cleanup(mini);
+	mini->token = malloc(sizeof * mini->token);
+	if (!mini->token)
+		clean_exit(mini, NULL, errno);
+	*mini->token = NULL;
 }
 
-static t_token *get_next_token(t_mini *mini, char *line, int *index)
+static void	create_tokens(t_mini *mini, char *line)
 {
-	t_token	*token;
+	t_token	*new_token;
+	t_type	delim_type;
+	int		index;
+	int		delim_check;
 
-	token = malloc(sizeof * token);
-	if (!token)
-		clean_exit(mini, "malloc");
-	
-	// if token the create a token
-	return (NULL);
-}
-
-static void tokenize(t_mini *mini, char *line)
-{
-	printf("%s\n", line);
-	int index = 0;
-	while(line[index])
-		get_next_token(mini, line, &index);
-}
-
-static void	new_prompt(t_mini *mini)
-{
-	char *line = readline("minishell:$ ");
-	if (line == NULL)
-		clean_exit(mini, "test");
-	if (line[0] != '\0')
+	init_token(mini);
+	index = 0;
+	while (line[index])
 	{
-		tokenize(mini, line);
-		add_history(line);
+		while (is_space(line[index]))
+			index++;
+		new_token = token_new(mini, WORD, NULL);
+		if (!new_token)
+			clean_exit(mini, NULL, errno);
+		token_add_back(mini, new_token);
+		delim_check = delimiter_check(&line[index], &delim_type, true);
+		if (delim_check == 0 || line[index] == '"' || line[index] == '\'')
+			index += token_word(mini, &line[index], new_token);
+		else
+		{
+			new_token->type = delim_type;
+			index += delim_check;
+		}
 	}
-	free(line);
-	line = NULL;
 }
 
 void	read_commands(t_mini *mini)
 {
-	(void)mini;
+	char	*line;
+
 	while (1)
-		new_prompt(mini);
+	{
+		line = readline("minishell:$ ");
+		if (line == NULL)
+			cleanup_exit(mini, 10);
+		if (line[0] != '\0')
+		{
+			create_tokens(mini, line);
+			print_tokens(mini);
+			add_history(line);
+		}
+		free(line);
+		line = NULL;
+	}
 }

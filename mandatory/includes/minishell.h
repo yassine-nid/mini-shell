@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/14 15:36:41 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/14 18:19:18 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+# include <errno.h>
 # include <signal.h>
 
 typedef struct s_env
@@ -76,10 +77,19 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 // ########## Cleanup #########
 void	clean_exit(t_mini *mini, char *error, int code);
-void	clean_exit_no(t_mini *mini, int code);
+void	cleanup_exit(t_mini *mini, int code);
 
 // ######### Commands reader #########
 void	read_commands(t_mini *mini);
 t_token	*token_new(t_mini *mini, t_type type, char *word);
+void	token_add_back(t_mini *mini, t_token *new);
+bool	is_space(char c);
+
+void	token_cleanup(t_mini *mini);
+int		delimiter_check(char *line, t_type *delimiter, bool quotes);
+int		token_word(t_mini *mini, char *line, t_token *token);
+
+// ############### TEST ################
+void	print_tokens(t_mini *mini);
 
 #endif
