@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/14 18:21:38 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/14 18:30:13 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	create_tokens(t_mini *mini, char *line)
 	{
 		while (is_space(line[index]))
 			index++;
+		if (!line[index])
+			break ;
 		new_token = token_new(mini, WORD, NULL);
 		if (!new_token)
 			clean_exit(mini, NULL, errno);
@@ -62,6 +64,10 @@ void	read_commands(t_mini *mini)
 		{
 			create_tokens(mini, line);
 			print_tokens(mini);
+			if (syntax_checker(*mini->token))
+				printf("Syntax Error\n");
+			else
+				printf("Syntax Correct\n");
 			add_history(line);
 		}
 		free(line);

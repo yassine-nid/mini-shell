@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:19:35 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/12 15:34:31 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/13 15:00:03 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	free_temps(t_mini *mini, char *key, char *origin, char *value)
 	free(key);
 	free(origin);
 	free(value);
-	clean_exit(mini, "malloc");
+	clean_exit(mini, "malloc", 20);
 }
 
 void	create_env(t_mini *mini, char *env[])
@@ -72,7 +72,7 @@ void	create_env(t_mini *mini, char *env[])
 
 	mini->env = malloc(sizeof * mini->env);
 	if (!mini->env)
-		clean_exit(mini, "Malloc");
+		clean_exit(mini, "Malloc", 22);
 	index = 0;
 	while (env[index])
 	{
@@ -92,6 +92,6 @@ void	create_env(t_mini *mini, char *env[])
 void	main_init(t_mini *mini, char *env[])
 {
 	if (env == NULL)
-		clean_exit(mini, "Invalid env");
+		clean_exit(mini, "Invalid env", 24);
 	create_env(mini, env);
 }

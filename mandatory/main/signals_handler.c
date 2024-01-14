@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:08:16 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/13 11:00:34 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/14 09:12:05 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	listen_to_signals(t_mini *mini)
 {
 	rl_catch_signals = 0;
 	if (register_signal(SIGINT) == -1)
-		clean_exit(mini, "sigaction error");
-	if (register_signal(SIGQUIT) == -1)
-		clean_exit(mini, "sigaction error");
+		clean_exit(mini, "sigaction error", 30);
+	// if (register_signal(SIGQUIT) == -1)
+	// 	clean_exit(mini, "sigaction error", 31);
 }

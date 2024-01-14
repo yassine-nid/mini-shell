@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:58:42 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/12 16:12:03 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/14 16:17:24 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,15 @@ void	ft_bzero(void *s, size_t n)
 {
 	while (n != 0 && n-- > 0)
 		*((unsigned char *)s++) = '\0';
+}
+
+bool	is_space(char c)
+{
+	if (c == '\t' || c == '\n')
+		return (true);
+	if (c == '\v' || c == '\f')
+		return (true);
+	if (c == '\r' || c == ' ')
+		return (true);
+	return (false);
 }

@@ -4,6 +4,25 @@
 		"__node_handle": "c",
 		"minishell.h": "c",
 		"stdio.h": "c",
-		"signal.h": "c"
+		"signal.h": "c",
+		"__bit_reference": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"unordered_map": "c",
+		"__locale": "c",
+		"type_traits": "c",
+		"__functional_base": "c",
+		"__functional_base_03": "c",
+		"__hash_table": "c",
+		"__tuple": "c",
+		"array": "c",
+		"functional": "c",
+		"iterator": "c",
+		"limits": "c",
+		"memory": "c",
+		"ratio": "c",
+		"tuple": "c",
+		"utility": "c"
 	}
 }
