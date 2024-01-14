@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/14 10:06:57 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/14 10:08:06 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_env
 typedef enum s_type
 {
 	WORD,		// anything else
+	W_SPACE,	// isspace(3)
 	PIPE,		// |
 	OR,			// ||
 	AND,		// &&
