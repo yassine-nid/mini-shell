@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/14 18:19:18 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/14 18:25:48 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ bool	is_space(char c);
 void	token_cleanup(t_mini *mini);
 int		delimiter_check(char *line, t_type *delimiter, bool quotes);
 int		token_word(t_mini *mini, char *line, t_token *token);
+
+// ############### Syntax Checker ################
+int		syntax_checker(t_token *token);
 
 // ############### TEST ################
 void	print_tokens(t_mini *mini);

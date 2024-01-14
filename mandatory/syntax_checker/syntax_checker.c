@@ -6,13 +6,13 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:59:31 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/14 18:21:21 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:24:21 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	syntax_par(t_token *token)
+static int	syntax_par(t_token *token)
 {
 	int	par_count;
 
@@ -33,7 +33,7 @@ int	syntax_par(t_token *token)
 		return (1);
 }
 
-int	check_pipe_or_and_open_par(t_token *token)
+static int	check_pipe_or_and_open_par(t_token *token)
 {
 	if (token->preveus == NULL)
 		return (1);
@@ -44,7 +44,7 @@ int	check_pipe_or_and_open_par(t_token *token)
 	return (0);
 }
 
-int	check_close_par(t_token *token)
+static int	check_close_par(t_token *token)
 {
 	if (token->preveus == NULL)
 		return (1);
@@ -53,7 +53,7 @@ int	check_close_par(t_token *token)
 	return (0);
 }
 
-int	check_all_red(t_token *token)
+static int	check_all_red(t_token *token)
 {
 	if (token->next == NULL)
 		return (1);
