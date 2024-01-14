@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/14 09:47:57 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/14 09:52:34 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ typedef enum s_type
 	W_SPACE,	// isspace(3)
 	PIPE,		// |
 	OR,			// ||
-	OPEN_PAR,	// (
-	CLOSE_PAR,	// )
 	AND,		// &&
 	AMPERSAND,	// &
+	OPEN_PAR,	// (
+	CLOSE_PAR,	// )
 	RED_IN,		// redirect input <
 	RED_OUT,	// redirect ouput >
 	RED_AP_OUT,	// redirect append output >>
