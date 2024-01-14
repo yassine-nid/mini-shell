@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/14 10:30:35 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/14 15:36:41 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef enum s_type
 	PIPE,		// |
 	OR,			// ||
 	AND,		// &&
-	AMPERSAND,	// &
 	OPEN_PAR,	// (
 	CLOSE_PAR,	// )
 	RED_IN,		// redirect input <
