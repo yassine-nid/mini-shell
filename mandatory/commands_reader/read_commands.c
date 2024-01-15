@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/14 18:46:33 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:17:59 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ void	read_commands(t_mini *mini)
 				printf("Syntax Error\n");
 			else
 				printf("Syntax Correct\n");
+
+			// print env
+			t_env *env = *mini->env;
+			while (env)
+			{
+				if (env->is_exported)
+					printf("%s=%s\n", env->key, env->value);
+				env = env->next;
+			}
+			
+
+
 			add_history(line);
 		}
 		free(line);

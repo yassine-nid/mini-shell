@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/15 11:15:45 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:01:56 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@
 # include <errno.h>
 # include <signal.h>
 
+# define DEFAULT_PATH "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+
 typedef struct s_env
 {
-	char			*origin;
 	char			*key;
 	char			*value;
 	struct s_env	*next;
+	bool			is_exported;
 }	t_env;
 
 typedef enum s_type
@@ -61,13 +63,20 @@ typedef struct s_mini
 	t_token			**token;
 }	t_mini;
 
-void	main_init(t_mini *mini, char *env[]);
 void	listen_to_signals(t_mini *mini);
+
+// ########## Env Handler #########
+void	handle_env(t_mini *mini, char *env[]);
+void	handle_defaults(t_mini *mini);
+void	create_env(t_mini *mini, char *key, char *value, bool exported);
+char	*env_atoi(t_mini *mini, char *old);
 
 // ########## Utils #########
 void	ft_lstadd_back(t_env **lst, t_env *new);
-t_env	*ft_lstnew(void *key, void *value, void *origin);
+t_env	*ft_lstnew(void *key, void *value);
 void	ft_lstiter(t_env *lst, void (*f)());
+
+bool    ft_strcmp(const char *s1, const char *s2);
 
 // Basic Libft
 void	ft_bzero(void *s, size_t n);

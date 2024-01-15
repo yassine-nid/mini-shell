@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
+#    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/01/15 11:16:51 by ynidkouc         ###   ########.fr        #
+#    Updated: 2024/01/15 14:31:00 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,11 @@ NAME = minishell
 HEAD_DIR = ./mandatory/includes/minishell.h
 
 #	-Main
-SRC_FILES = main.c main_init.c signals_handler.c
+SRC_FILES = main.c signals_handler.c
 SRC_DIR = ./mandatory/main/
 
 #	-Utils
-UTILS_FILES = utils_lst.c basic_libft.c
+UTILS_FILES = utils_lst.c basic_libft.c str_utils.c
 UTILS_DIR = ./mandatory/utils/
 
 #	-Cleanup
@@ -43,13 +43,18 @@ READER_DIR = ./mandatory/commands_reader/
 SYNTAX_FILES = syntax_checker.c syntax_checker_helper.c
 SYNTAX_DIR = ./mandatory/syntax_checker/
 
+#	-Env Handler
+ENV_FILES = env_handler.c env_defaults.c env_utils.c
+ENV_DIR = ./mandatory/env_handler/
+
 #	-Tests
 TESTS_FILES = tests.c
 TESTS_DIR = ./mandatory/tests/
 
 
 OBJ_FILES = $(SRC_FILES:.c=.o) $(UTILS_FILES:.c=.o) $(CLEANUP_FILES:.c=.o) \
-			$(READER_FILES:.c=.o) $(TESTS_FILES:.c=.o) $(SYNTAX_FILES:.c=.o)
+			$(READER_FILES:.c=.o) $(TESTS_FILES:.c=.o) $(SYNTAX_FILES:.c=.o) \
+			$(ENV_FILES:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 all: $(NAME)
@@ -81,6 +86,10 @@ $(OBJ_DIR)%.o: $(SYNTAX_DIR)%.c $(HEAD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(TESTS_DIR)%.c $(HEAD_DIR)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+
+$(OBJ_DIR)%.o: $(ENV_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 

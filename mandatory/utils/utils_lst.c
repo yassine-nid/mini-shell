@@ -6,13 +6,13 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:02:39 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/12 15:24:41 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/15 14:17:41 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_env	*ft_lstnew(void *key, void *value, void *origin)
+t_env	*ft_lstnew(void *key, void *value)
 {
 	t_env	*result;
 
@@ -22,7 +22,6 @@ t_env	*ft_lstnew(void *key, void *value, void *origin)
 	result->next = NULL;
 	result->value = value;
 	result->key = key;
-	result->origin = origin;
 	return (result);
 }
 

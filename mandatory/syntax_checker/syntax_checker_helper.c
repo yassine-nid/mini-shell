@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_checker_v2.c                                :+:      :+:    :+:   */
+/*   syntax_checker_helper.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:18:38 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/15 11:14:32 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:23:31 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	check_word(t_token *token)
-{
-	if (token->next == NULL)
-		return (0);
-	if (token->next->type == OPEN_PAR)
-		return (1);
-	return (0);
-}
 
 static int	quoate_syntax(char *word)
 {
@@ -44,6 +35,15 @@ static int	quoate_syntax(char *word)
 			word++;
 	}
 	return (quoate_count % 2);
+}
+
+int	check_word(t_token *token)
+{
+	if (token->next == NULL)
+		return (0);
+	if (token->next->type == OPEN_PAR)
+		return (1);
+	return (0);
 }
 
 int	check_quoate(t_token *token)

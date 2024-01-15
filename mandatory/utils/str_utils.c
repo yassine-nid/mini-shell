@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 10:47:59 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/15 11:27:32 by yzirri           ###   ########.fr       */
+/*   Created: 2024/01/15 13:39:45 by yzirri            #+#    #+#             */
+/*   Updated: 2024/01/15 14:30:47 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
+#include "../includes/minishell.h"
 
-int	main(int argc, char *argv[], char *envp[])
+bool    ft_strcmp(const char *s1, const char *s2)
 {
-	t_mini	mini;
-
-	(void)argc;
-	(void)argv;
-	handle_env(&mini, envp);
-	listen_to_signals(&mini);
-	read_commands(&mini);
-	return (0);
+    if (!s1 && s2)
+        return (false);
+	if (s1 && !s2)
+        return (false);
+    while (*s1 && *s2)
+    {
+        if (*s1 != *s2)
+            return (false);
+        s1++;
+        s2++;
+    }
+    return ((unsigned char)*s1 == (unsigned char)*s2);
 }
