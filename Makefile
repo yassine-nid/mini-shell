@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
+#    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/01/14 18:27:37 by yzirri           ###   ########.fr        #
+#    Updated: 2024/01/15 11:16:51 by ynidkouc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ READER_FILES = read_commands.c tokenizer.c tokenizer_utils.c
 READER_DIR = ./mandatory/commands_reader/
 
 #	-Syntax Checker
-SYNTAX_FILES = syntax_checker.c
+SYNTAX_FILES = syntax_checker.c syntax_checker_helper.c
 SYNTAX_DIR = ./mandatory/syntax_checker/
 
 #	-Tests

@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:59:31 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/14 19:01:45 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:13:46 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,6 @@ static int	check_all_red(t_token *token)
 	return (0);
 }
 
-static int	check_word(t_token *token)
-{
-	if (token->next == NULL)
-		return (0);
-	if (token->next->type == OPEN_PAR)
-		return (1);
-	return (0);
-}
-
 int	syntax_checker(t_token *token)
 {
 	int	is_valid;
@@ -89,7 +80,7 @@ int	syntax_checker(t_token *token)
 	is_valid = 0;
 	if (!token)
 		return (0);
-	if (syntax_par(token))
+	if (syntax_par(token) || check_quoate(token))
 		return (1);
 	while (token)
 	{

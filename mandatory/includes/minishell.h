@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/14 18:25:48 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:15:45 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int		token_word(t_mini *mini, char *line, t_token *token);
 
 // ############### Syntax Checker ################
 int		syntax_checker(t_token *token);
+int		check_word(t_token *token);
+int		check_quoate(t_token *token);
 
 // ############### TEST ################
 void	print_tokens(t_mini *mini);
