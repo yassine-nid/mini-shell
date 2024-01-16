@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/15 15:01:56 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/16 08:21:10 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	listen_to_signals(t_mini *mini);
 void	handle_env(t_mini *mini, char *env[]);
 void	handle_defaults(t_mini *mini);
 void	create_env(t_mini *mini, char *key, char *value, bool exported);
-char	*env_atoi(t_mini *mini, char *old);
+char	*env_atoi(char *old);
 
 // ########## Utils #########
 void	ft_lstadd_back(t_env **lst, t_env *new);
@@ -77,6 +77,7 @@ t_env	*ft_lstnew(void *key, void *value);
 void	ft_lstiter(t_env *lst, void (*f)());
 
 bool    ft_strcmp(const char *s1, const char *s2);
+char	*ft_itoa(int n);
 
 // Basic Libft
 void	ft_bzero(void *s, size_t n);
@@ -105,5 +106,6 @@ int		check_quoate(t_token *token);
 
 // ############### TEST ################
 void	print_tokens(t_mini *mini);
+void	print_envs(t_mini *mini);
 
 #endif

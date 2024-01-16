@@ -69,3 +69,15 @@ void	print_tokens(t_mini *mini)
 	}
 	printf("\n");
 }
+
+void	print_envs(t_mini *mini)
+{
+	t_env *env = *mini->env;
+	while (env)
+	{
+		if (env->is_exported)
+			printf("%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
+	printf("\n");
+}

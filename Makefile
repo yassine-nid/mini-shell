@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/01/15 14:31:00 by yzirri           ###   ########.fr        #
+#    Updated: 2024/01/16 08:10:11 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC_FILES = main.c signals_handler.c
 SRC_DIR = ./mandatory/main/
 
 #	-Utils
-UTILS_FILES = utils_lst.c basic_libft.c str_utils.c
+UTILS_FILES = utils_lst.c basic_libft.c str_utils.c basic_libft2.c
 UTILS_DIR = ./mandatory/utils/
 
 #	-Cleanup
