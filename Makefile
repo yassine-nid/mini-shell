@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/01/18 13:21:23 by yzirri           ###   ########.fr        #
+#    Updated: 2024/01/18 18:48:33 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,10 @@ ENV_DIR = ./mandatory/env_handler/
 EXPAND_FILES = expander.c expander_word.c expander_quotes.c
 EXPAND_DIR = ./mandatory/expander/
 
+#	-Expander
+BUILTIN_FILES = m_echo.c
+BUILTIN_DIR = ./mandatory/builtins/
+
 #	-Tests
 TESTS_FILES = tests.c
 TESTS_DIR = ./mandatory/tests/
@@ -58,7 +62,7 @@ TESTS_DIR = ./mandatory/tests/
 
 OBJ_FILES = $(SRC_FILES:.c=.o) $(UTILS_FILES:.c=.o) $(CLEANUP_FILES:.c=.o) \
 			$(READER_FILES:.c=.o) $(TESTS_FILES:.c=.o) $(SYNTAX_FILES:.c=.o) \
-			$(ENV_FILES:.c=.o) $(EXPAND_FILES:.c=.o)
+			$(ENV_FILES:.c=.o) $(EXPAND_FILES:.c=.o) $(BUILTIN_FILES:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 all: $(NAME)
@@ -94,6 +98,10 @@ $(OBJ_DIR)%.o: $(TESTS_DIR)%.c $(HEAD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(ENV_DIR)%.c $(HEAD_DIR)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+
+$(OBJ_DIR)%.o: $(BUILTIN_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 

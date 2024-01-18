@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:11:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 17:10:07 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 18:46:42 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	clean_exit(t_mini *mini, char *error, int code)
 	if (!error)
 		perror("minishell");
 	else
-		printf("%s", error);
+		ft_putstr_fd(error, 2);
 	system("leaks minishell");
 	exit(code);
 }

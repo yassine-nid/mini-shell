@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 16:46:25 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 18:47:01 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	ft_lstiter(t_env *lst, void (*f)());
 
 bool    ft_strcmp(const char *s1, const char *s2);
 char	*ft_itoa(int n);
+
+void	ft_putstr_fd(char *s, int fd);
 
 // ############# Basic Libft ###############
 void	ft_bzero(void *s, size_t n);

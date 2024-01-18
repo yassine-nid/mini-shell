@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 17:21:42 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 18:53:48 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,21 @@ void	read_commands(t_mini *mini)
 			expand_tokens(mini);
 			print_tokens(mini);
 			add_history(line);
+
+			bool reseted = true;
+			t_token *token = *mini->token;
+			while (token)
+			{
+				if (token->type == WORD && reseted)
+				{
+					if (ft_strcmp(token))
+					reseted = false;
+				}
+				if (token->type != WORD)
+					reseted = true;
+				token->next;
+			}
+			
 		}
 		free(line);
 		line = NULL;

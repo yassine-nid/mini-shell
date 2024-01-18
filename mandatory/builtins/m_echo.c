@@ -1,44 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils.c                                        :+:      :+:    :+:   */
+/*   m_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 13:39:45 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 18:49:59 by yzirri           ###   ########.fr       */
+/*   Created: 2024/01/18 18:33:19 by yzirri            #+#    #+#             */
+/*   Updated: 2024/01/18 18:50:23 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool    ft_strcmp(const char *s1, const char *s2)
+void	do_echo(t_mini *mini, t_token *token)
 {
-    if (!s1 && s2)
-        return (false);
-	if (s1 && !s2)
-        return (false);
-    while (*s1 && *s2)
-    {
-        if (*s1 != *s2)
-            return (false);
-        s1++;
-        s2++;
-    }
-    return ((unsigned char)*s1 == (unsigned char)*s2);
-}
+	bool	no_new_line;
+	t_token	*next_token;
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	char	c;
-
-	if (s == NULL)
-		return ;
-	while (*s)
+	next_token = token->next;
+	if (next_token == NULL)
 	{
-		c = *s;
-		write(fd, &c, 1);
-		s++;
+		ft_putstr_fd("\n", 1);
+		mini->exit_status = 0;
+		return ;
 	}
+	no_new_line = false;
+	if (ft_strcmp(next_token->word, "-n"))
+	{
+		no_new_line = true;
+		next_token = next_token->next;
+	}
+	while (next_token)
+	{
+		ft_putstr_fd(next_token->word, 1);
+		next_token = next_token->next;
+	}
+	if (no_new_line)
+		ft_putstr_fd("\n", 1);
 }
-
