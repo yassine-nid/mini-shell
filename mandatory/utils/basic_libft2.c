@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 08:09:54 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/16 08:13:52 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/16 09:31:12 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,26 @@ char	*ft_itoa(int n)
 		fill_str(resut, alloc_size - 1, n, 0);
 	resut[alloc_size] = '\0';
 	return (resut);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c <= '9' && c >= '0')
+		return (1);
+	return (0);
+}
+
+int	ft_isalpha(int c)
+{
+	int	islower;
+	int	isupper;
+
+	islower = c >= 'a' && c <= 'z';
+	isupper = c >= 'A' && c <= 'Z';
+	return (islower || isupper);
+}
+
+int	is_alpha_num(int c)
+{
+	return (ft_isalpha(c) || ft_isdigit(c) || c == '_');
 }

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/16 08:23:50 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:23:14 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	read_commands(t_mini *mini)
 			// print env
 			if (line[0] == 'e' && line[1] == 'n' && line[2] == 'v')
 				print_envs(mini);
+			expand_tokens(mini);
+			print_tokens(mini);
 			add_history(line);
 		}
 		free(line);

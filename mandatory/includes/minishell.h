@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 10:17:44 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 14:47:11 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,6 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-typedef struct	s_vars
-{
-	int	last_exit_status;
-}	t_vars;
-
 typedef struct s_tree
 {
     t_token			*node;
@@ -73,13 +68,17 @@ typedef struct s_mini
 {
 	t_env			**env;
 	t_token			**token;
-	t_vars			**vars;
+	int				exit_status;
 }	t_mini;
 
 void	listen_to_signals(t_mini *mini);
 
 // ############ Expander ###########
 void	expand_token(t_mini *mini, t_token *token);
+void	expand_word(t_mini *mini, t_token *token, int index);
+bool	is_s_quote(char *str, int index);
+void	remove_quotes(t_mini *mini, t_token *token);
+void	expand_status(t_mini *mini, t_token *token, int index);
 
 // ########## Env Handler ########@#
 void	handle_env(t_mini *mini, char *env[]);

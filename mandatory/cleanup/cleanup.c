@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:11:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/15 14:11:56 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/16 14:45:56 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,9 @@ void	cleanup_exit(t_mini *mini, int code)
 {
 	(void)mini;
 	exit(code);
+}
+
+void	clean_tree(t_mini *mini)
+{
+	(void)mini;
 }
