@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 10:17:05 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:17:44 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,6 @@ int		check_quoate(t_token *token);
 void	print_tokens(t_mini *mini);
 void	print_envs(t_mini *mini);
 void	expand_tokens(t_mini *mini);
-void printTokenTypeWithColor(t_token *token);
+void 	printTokenTypeWithColor(t_token *token);
 
 #endif
