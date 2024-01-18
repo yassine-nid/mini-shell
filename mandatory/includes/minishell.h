@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/16 08:21:10 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/16 14:59:18 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,37 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct	s_vars
+{
+	int	last_exit_status;
+}	t_vars;
+
+typedef struct s_tree
+{
+    t_token			*node;
+    struct s_tree	*left;
+    struct s_tree	*right;
+}	t_tree;
+
 typedef struct s_mini
 {
 	t_env			**env;
 	t_token			**token;
+	t_vars			**vars;
 }	t_mini;
 
 void	listen_to_signals(t_mini *mini);
 
-// ########## Env Handler #########
+// ############ Expander ###########
+void	expand_token(t_mini *mini, t_token *token);
+
+// ########## Env Handler ########@#
 void	handle_env(t_mini *mini, char *env[]);
 void	handle_defaults(t_mini *mini);
 void	create_env(t_mini *mini, char *key, char *value, bool exported);
 char	*env_atoi(char *old);
 
-// ########## Utils #########
+// ############ Utils ###########
 void	ft_lstadd_back(t_env **lst, t_env *new);
 t_env	*ft_lstnew(void *key, void *value);
 void	ft_lstiter(t_env *lst, void (*f)());
@@ -79,17 +95,21 @@ void	ft_lstiter(t_env *lst, void (*f)());
 bool    ft_strcmp(const char *s1, const char *s2);
 char	*ft_itoa(int n);
 
-// Basic Libft
+// ############# Basic Libft ###############
 void	ft_bzero(void *s, size_t n);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+int		ft_isdigit(int c);
+int		ft_isalpha(int c);
+int		is_alpha_num(int c);
 
-// ########## Cleanup #########
+// ############ Cleanup #############
 void	clean_exit(t_mini *mini, char *error, int code);
 void	cleanup_exit(t_mini *mini, int code);
+void	clean_tree(t_mini *mini);
 
-// ######### Commands reader #########
+// ########### Commands reader ###########
 void	read_commands(t_mini *mini);
 t_token	*token_new(t_mini *mini, t_type type, char *word);
 void	token_add_back(t_mini *mini, t_token *new);
@@ -107,5 +127,6 @@ int		check_quoate(t_token *token);
 // ############### TEST ################
 void	print_tokens(t_mini *mini);
 void	print_envs(t_mini *mini);
+void	expand_tokens(t_mini *mini);
 
 #endif
