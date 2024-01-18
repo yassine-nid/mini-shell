@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 10:23:14 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 17:21:42 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	read_commands(t_mini *mini)
 		line = readline("minishell:$ ");
 		if (line == NULL)
 			cleanup_exit(mini, 10);
+		token_cleanup(mini);
 		if (line[0] != '\0')
 		{
 			create_tokens(mini, line);
@@ -69,6 +70,8 @@ void	read_commands(t_mini *mini)
 			else
 				printf("Syntax Correct\n");
 			// print env
+			if (line[0] == 'e' && line[1] == 'x' && line[2] == 'i' && line[3] == 't')
+				clean_exit(mini, "test", 69);
 			if (line[0] == 'e' && line[1] == 'n' && line[2] == 'v')
 				print_envs(mini);
 			expand_tokens(mini);

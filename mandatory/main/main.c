@@ -6,11 +6,11 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:59 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 14:47:31 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 17:33:09 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
+#include "../includes/minishell.h"
 
 static void	init_vars(t_mini *mini)
 {

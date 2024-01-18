@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 14:47:11 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 16:46:25 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int		is_alpha_num(int c);
 void	clean_exit(t_mini *mini, char *error, int code);
 void	cleanup_exit(t_mini *mini, int code);
 void	clean_tree(t_mini *mini);
+void	env_cleanup(t_mini *mini);
 
 // ########### Commands reader ###########
 void	read_commands(t_mini *mini);

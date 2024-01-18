@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:15:41 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 15:07:33 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 17:24:20 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ void	expand_status(t_mini *mini, t_token *token, int index)
 	while (new_word[++ind])
 		new_word[ind] = token->word[index++ + 2];
 	free(token->word);
+	free(exit_st);
 	token->word = new_word;
 }
