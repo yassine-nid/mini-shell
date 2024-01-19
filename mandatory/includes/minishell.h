@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 18:47:01 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/19 12:33:17 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <signal.h>
 
 # define DEFAULT_PATH "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+# define NOT_VALID "not a valid identifier"
 
 typedef struct s_env
 {
@@ -71,20 +72,43 @@ typedef struct s_mini
 	int				exit_status;
 }	t_mini;
 
+// 1: ##################### Main #####################
 void	listen_to_signals(t_mini *mini);
 
-// ############ Expander ###########
+// 2: ################## Expander ####################
 void	expand_token(t_mini *mini, t_token *token);
-void	expand_word(t_mini *mini, t_token *token, int index);
-bool	is_s_quote(char *str, int index);
-void	remove_quotes(t_mini *mini, t_token *token);
-void	expand_status(t_mini *mini, t_token *token, int index);
+void	m_expand_word(t_mini *mini, t_token *token, int index);
+void	m_remove_quotes(t_mini *mini, t_token *token);
+void	m_expand_status(t_mini *mini, t_token *token, int index);
 
-// ########## Env Handler ########@#
+// 3: ############### Syntax Checker #################
+int		syntax_checker(t_token *token);
+int		check_word(t_token *token);
+int		check_quoate(t_token *token);
+
+// 4: ################ Commands reader ###############
+void	read_commands(t_mini *mini);
+
+// 5: ################ tokenizer #####################
+void	create_tokens(t_mini *mini, char *line);
+int		delimiter_check(char *line, t_type *delimiter, bool quotes);
+t_token	*token_new(t_mini *mini, t_type type, char *word);
+void	token_add_back(t_mini *mini, t_token *new);
+void	remove_token(t_mini *mini, t_token *token);
+
+// ##################### Env Handler #################
 void	handle_env(t_mini *mini, char *env[]);
 void	handle_defaults(t_mini *mini);
-void	create_env(t_mini *mini, char *key, char *value, bool exported);
+int		create_env(t_mini *mini, char *key, char *value, bool exported);
 char	*env_atoi(char *old);
+char	*get_key(char *str, bool *malloc_failed);
+char	*get_value(char *str, bool *malloc_failed);
+
+
+// ############################################### MODified ####################################
+int		do_echo(t_token *token);
+int		do_export(t_mini *mini, t_token *token);
+
 
 // ############ Utils ###########
 void	ft_lstadd_back(t_env **lst, t_env *new);
@@ -94,7 +118,10 @@ void	ft_lstiter(t_env *lst, void (*f)());
 bool    ft_strcmp(const char *s1, const char *s2);
 char	*ft_itoa(int n);
 
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd(char *s, int fd);
+bool    ft_strcmp_no_case(const char *s1, const char *s2);
+
+bool	is_str_alpha_num(char *str);
 
 // ############# Basic Libft ###############
 void	ft_bzero(void *s, size_t n);
@@ -110,21 +137,13 @@ void	clean_exit(t_mini *mini, char *error, int code);
 void	cleanup_exit(t_mini *mini, int code);
 void	clean_tree(t_mini *mini);
 void	env_cleanup(t_mini *mini);
+void	print_mini_error(t_mini *mini, char *command, char *arg, char *error);
 
 // ########### Commands reader ###########
 void	read_commands(t_mini *mini);
-t_token	*token_new(t_mini *mini, t_type type, char *word);
-void	token_add_back(t_mini *mini, t_token *new);
 bool	is_space(char c);
 
 void	token_cleanup(t_mini *mini);
-int		delimiter_check(char *line, t_type *delimiter, bool quotes);
-int		token_word(t_mini *mini, char *line, t_token *token);
-
-// ############### Syntax Checker ################
-int		syntax_checker(t_token *token);
-int		check_word(t_token *token);
-int		check_quoate(t_token *token);
 
 // ############### TEST ################
 void	print_tokens(t_mini *mini);

@@ -6,64 +6,32 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:19:35 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/15 14:20:24 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/19 12:22:19 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*get_key(char *str)
+static void	get_key_val(t_mini *mini, char *env, char **key, char **val)
 {
-	int		index;
-	char	*result;
+	bool	m_f;
 
-	index = 0;
-	result = NULL;
-	if (!str)
-		return (NULL);
-	while (str[index] && str[index] != '=')
-		index++;
-	if (str[index] != '=')
-		return (result);
-	result = malloc(sizeof * result * (index + 1));
-	if (!result)
-		return (result);
-	result[index] = '\0';
-	while (index-- > 0)
-		result[index] = str[index];
-	return (result);
-}
-
-char	*get_value(char *str)
-{
-	int		index;
-	int		end_index;
-	char	*result;
-
-	index = 0;
-	end_index = 0;
-	result = NULL;
-	if (!str)
-		return (NULL);
-	while (str[index] && str[index] != '=')
-		index++;
-	if (str[index] != '=')
-		return (result);
-	index++;
-	while (str[end_index + index])
-		end_index++;
-	result = malloc(sizeof * result * (end_index + 1));
-	if (!result)
-		return (result);
-	result[end_index] = '\0';
-	while (--end_index >= 0)
-		result[end_index] = str[end_index + index];
-	return (result);
+	*key = get_key(env, &m_f);
+	if (m_f)
+		clean_exit(mini, NULL, errno);
+	*val = get_value(env, &m_f);
+	if (m_f)
+	{
+		free(key);
+		clean_exit(mini, NULL, errno);
+	}
 }
 
 static void	init_envs(t_mini *mini, char *env[])
 {
 	int		index;
+	char	*key;
+	char	*val;
 
 	mini->env = malloc(sizeof * mini->env);
 	if (!mini->env)
@@ -72,7 +40,13 @@ static void	init_envs(t_mini *mini, char *env[])
 	index = 0;
 	while (env[index])
 	{
-		create_env(mini, get_key(env[index]), get_value(env[index]), true);
+		get_key_val(mini, env[index], &key, &val);
+		if (create_env(mini, key, val, true) != 0)
+		{
+			free(key);
+			free(val);
+			clean_exit(mini, NULL, errno);
+		}
 		index++;
 	}
 }

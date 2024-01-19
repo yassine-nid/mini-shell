@@ -6,35 +6,11 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:09:07 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 15:02:42 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/19 11:33:52 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-bool	is_s_quote(char *str, int index)
-{
-	bool	inside;
-	char	curr_quote;
-	int		ind;
-
-	inside = false;
-	ind = 0;
-	while (str[ind])
-	{
-		if (inside && str[ind] == curr_quote)
-			inside = false;
-		else if (!inside && (str[ind] == '\'' || str[ind] == '"'))
-		{
-			inside = true;
-			curr_quote = str[ind];
-		}
-		if (ind == index)
-			return (inside && curr_quote == '\'');
-		ind++;
-	}
-	return (false);
-}
 
 static char	*alloc_new_word(t_mini *mini, char *str)
 {
@@ -58,6 +34,7 @@ static char	*alloc_new_word(t_mini *mini, char *str)
 	new_str = malloc(sizeof * new_str * (alloc_size + 1));
 	if (!new_str)
 		clean_exit(mini, NULL, errno);
+	new_str[alloc_size] = '\0';
 	return (new_str);
 }
 
@@ -68,7 +45,7 @@ static void	replace(t_token *token, int ind, char *new_word)
 	token->word = new_word;
 }
 
-void	remove_quotes(t_mini *mini, t_token *token)
+void	m_remove_quotes(t_mini *mini, t_token *token)
 {
 	char	*new_word;
 	int		index;

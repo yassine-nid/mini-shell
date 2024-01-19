@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:08:16 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 17:33:23 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/19 10:39:11 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	handle_signal(int sig, siginfo_t *info, void *context)
 	{
 		write(1, "\n", 1);
 		rl_replace_line("", 1);
-        rl_on_new_line();
-        rl_redisplay();
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }
 
@@ -39,7 +39,7 @@ void	listen_to_signals(t_mini *mini)
 {
 	rl_catch_signals = 0;
 	if (register_signal(SIGINT) == -1)
-		clean_exit(mini, "sigaction error", 30);
+		clean_exit(mini, "sigaction error", EXIT_FAILURE);
 	if (register_signal(SIGQUIT) == -1)
-		clean_exit(mini, "sigaction error", 31);
+		clean_exit(mini, "sigaction error", EXIT_FAILURE);
 }

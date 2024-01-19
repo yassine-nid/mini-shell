@@ -6,39 +6,39 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:15:41 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 17:24:20 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/19 11:33:41 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static t_env	*is_env(t_mini *mini, char *str, int index, int *skip)
+static t_env	*is_env(t_mini *mini, char *word, int index, int *skip)
 {
 	t_env	*env;
 
-	if (!str || !str[index++])
+	if (!word || !word[index++])
 		return (NULL);
 	env = *mini->env;
 	while (env)
 	{
 		*skip = 0;
-		while (env->key && env->key[*skip] && str[index + *skip])
+		while (env->key && env->key[*skip] && word[index + *skip])
 		{
-			if (env->key[*skip] != str[index + *skip])
+			if (env->key[*skip] != word[index + *skip])
 				break ;
 			*skip = *skip + 1;
 		}
-		if (env->key && !env->key[*skip] && !is_alpha_num(str[index + *skip]))
+		if (env->key && !env->key[*skip] && !is_alpha_num(word[index + *skip]))
 			return (env);
 		env = env->next;
 	}
 	*skip = 0;
-	while (str[index + *skip] && is_alpha_num(str[index + *skip]))
+	while (word[index + *skip] && is_alpha_num(word[index + *skip]))
 		*skip = *skip + 1;
 	return (NULL);
 }
 
-static char	*alloc(t_mini *mini, int len, char *src, bool free_src)
+static char	*alloc(t_mini *mini, int len, char *env_value, bool free_src)
 {
 	int		alloc_size;
 	int		ind;
@@ -46,20 +46,22 @@ static char	*alloc(t_mini *mini, int len, char *src, bool free_src)
 
 	alloc_size = len;
 	ind = 0;
-	while (src && src[ind++])
+	while (env_value && env_value[ind++])
 		alloc_size++;
 	new_word = malloc(sizeof * new_word * (alloc_size + 1));
-	if (!new_word && free_src)
-		free(src);
 	if (!new_word)
+	{
+		if (free_src)
+			free(env_value);
 		clean_exit(mini, NULL, errno);
+	}
 	new_word[alloc_size] = '\0';
 	while (--alloc_size >= 0)
 		new_word[alloc_size] = 'o';
 	return (new_word);
 }
 
-void	expand_word(t_mini *mini, t_token *token, int index)
+void	m_expand_word(t_mini *mini, t_token *token, int index)
 {
 	t_env	*env;
 	int		skip_l;
@@ -87,7 +89,7 @@ void	expand_word(t_mini *mini, t_token *token, int index)
 	token->word = n_w;
 }
 
-void	expand_status(t_mini *mini, t_token *token, int index)
+void	m_expand_status(t_mini *mini, t_token *token, int index)
 {
 	char	*new_word;
 	int		ind;

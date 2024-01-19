@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/01/18 18:48:33 by yzirri           ###   ########.fr        #
+#    Updated: 2024/01/19 11:42:19 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,24 @@ HEAD_DIR = ./mandatory/includes/minishell.h
 SRC_FILES = main.c signals_handler.c
 SRC_DIR = ./mandatory/main/
 
+#	-Expander
+EXPAND_FILES = expander.c expander_word.c expander_quotes.c
+EXPAND_DIR = ./mandatory/expander/
+
+#	-Syntax Checker
+SYNTAX_FILES = syntax_checker.c syntax_checker_helper.c
+SYNTAX_DIR = ./mandatory/syntax_checker/
+
+#	-Commands_Reader
+READER_FILES = read_commands.c
+READER_DIR = ./mandatory/commands_reader/
+
+#	-Tokenizer
+TOKENIZER_FILES = tokenizer_utils.c tokenizer.c
+TOKENIZER_DIR = ./mandatory/tokenizer/
+
+
+########################################
 #	-Utils
 UTILS_FILES = utils_lst.c basic_libft.c str_utils.c basic_libft2.c
 UTILS_DIR = ./mandatory/utils/
@@ -35,24 +53,15 @@ UTILS_DIR = ./mandatory/utils/
 CLEANUP_FILES = cleanup.c
 CLEANUP_DIR = ./mandatory/cleanup/
 
-#	-Commands_Reader
-READER_FILES = read_commands.c tokenizer.c tokenizer_utils.c
-READER_DIR = ./mandatory/commands_reader/
 
-#	-Syntax Checker
-SYNTAX_FILES = syntax_checker.c syntax_checker_helper.c
-SYNTAX_DIR = ./mandatory/syntax_checker/
 
 #	-Env Handler
 ENV_FILES = env_handler.c env_defaults.c env_utils.c
 ENV_DIR = ./mandatory/env_handler/
 
-#	-Expander
-EXPAND_FILES = expander.c expander_word.c expander_quotes.c
-EXPAND_DIR = ./mandatory/expander/
 
-#	-Expander
-BUILTIN_FILES = m_echo.c
+#	-builtins
+BUILTIN_FILES = m_echo.c m_export.c
 BUILTIN_DIR = ./mandatory/builtins/
 
 #	-Tests
@@ -62,7 +71,8 @@ TESTS_DIR = ./mandatory/tests/
 
 OBJ_FILES = $(SRC_FILES:.c=.o) $(UTILS_FILES:.c=.o) $(CLEANUP_FILES:.c=.o) \
 			$(READER_FILES:.c=.o) $(TESTS_FILES:.c=.o) $(SYNTAX_FILES:.c=.o) \
-			$(ENV_FILES:.c=.o) $(EXPAND_FILES:.c=.o) $(BUILTIN_FILES:.c=.o)
+			$(ENV_FILES:.c=.o) $(EXPAND_FILES:.c=.o) $(BUILTIN_FILES:.c=.o) \
+			$(TOKENIZER_FILES:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 all: $(NAME)
@@ -106,6 +116,10 @@ $(OBJ_DIR)%.o: $(BUILTIN_DIR)%.c $(HEAD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(EXPAND_DIR)%.c $(HEAD_DIR)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+
+$(OBJ_DIR)%.o: $(TOKENIZER_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 

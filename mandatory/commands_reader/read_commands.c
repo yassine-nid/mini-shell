@@ -6,50 +6,11 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 18:53:48 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/19 11:39:05 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static void	init_token(t_mini *mini)
-{
-	token_cleanup(mini);
-	mini->token = malloc(sizeof * mini->token);
-	if (!mini->token)
-		clean_exit(mini, NULL, errno);
-	*mini->token = NULL;
-}
-
-static void	create_tokens(t_mini *mini, char *line)
-{
-	t_token	*new_token;
-	t_type	delim_type;
-	int		index;
-	int		delim_check;
-
-	init_token(mini);
-	index = 0;
-	while (line[index])
-	{
-		while (is_space(line[index]))
-			index++;
-		if (!line[index])
-			break ;
-		new_token = token_new(mini, WORD, NULL);
-		if (!new_token)
-			clean_exit(mini, NULL, errno);
-		token_add_back(mini, new_token);
-		delim_check = delimiter_check(&line[index], &delim_type, true);
-		if (delim_check == 0 || line[index] == '"' || line[index] == '\'')
-			index += token_word(mini, &line[index], new_token);
-		else
-		{
-			new_token->type = delim_type;
-			index += delim_check;
-		}
-	}
-}
 
 void	read_commands(t_mini *mini)
 {
@@ -72,6 +33,8 @@ void	read_commands(t_mini *mini)
 			// print env
 			if (line[0] == 'e' && line[1] == 'x' && line[2] == 'i' && line[3] == 't')
 				clean_exit(mini, "test", 69);
+			if (line[0] == 'l' && line[1] == 'e' && line[2] == 'a' && line[3] == 'k')
+				system("leaks minishell");
 			if (line[0] == 'e' && line[1] == 'n' && line[2] == 'v')
 				print_envs(mini);
 			expand_tokens(mini);
@@ -84,12 +47,15 @@ void	read_commands(t_mini *mini)
 			{
 				if (token->type == WORD && reseted)
 				{
-					if (ft_strcmp(token))
+					if (ft_strcmp_no_case(token->word, "echo"))
+						mini->exit_status = do_echo(token);
+					if (ft_strcmp(token->word, "export"))
+						mini->exit_status = do_export(mini, token);
 					reseted = false;
 				}
 				if (token->type != WORD)
 					reseted = true;
-				token->next;
+				token = token->next;
 			}
 			
 		}

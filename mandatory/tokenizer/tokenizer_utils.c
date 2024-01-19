@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:05:55 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/14 17:21:21 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/19 12:05:36 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*token_new(t_mini *mini, t_type type, char *word)
 
 	result = malloc (sizeof * result);
 	if (result == NULL)
-		clean_exit(mini,  NULL, errno);
+		clean_exit(mini, NULL, errno);
 	result->next = NULL;
 	result->preveus = NULL;
 	result->type = type;
@@ -68,4 +68,25 @@ int	delimiter_check(char *line, t_type *delimiter, bool quotes)
 	if (*line == ')')
 		return (*delimiter = CLOSE_PAR, 1);
 	return (0);
+}
+
+void	remove_token(t_mini *mini, t_token *token)
+{
+	if (!mini || !mini->token || !token)
+		return ;
+	if (*mini->token == token)
+	{
+		*mini->token = token->next;
+		if (token->next)
+			token->next->preveus = NULL;
+		free(token->word);
+		free(token);
+		return ;
+	}
+	if (token->preveus)
+		token->preveus->next = token->next;
+	if (token->next)
+		token->next->preveus = token->preveus;
+	free(token->word);
+	free(token);
 }

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:11:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 18:46:42 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/18 20:33:30 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,17 @@ void	clean_exit(t_mini *mini, char *error, int code)
 		ft_putstr_fd(error, 2);
 	system("leaks minishell");
 	exit(code);
+}
+
+void	print_mini_error(t_mini *mini, char *command, char *arg, char *error)
+{
+	(void)mini;
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(command, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd("\'", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd("\': ", 2);
+	ft_putstr_fd(error, 2);
+	ft_putstr_fd("\n", 2);
 }
