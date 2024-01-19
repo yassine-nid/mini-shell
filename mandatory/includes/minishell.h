@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/19 12:33:17 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/19 12:34:59 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_token	*token_new(t_mini *mini, t_type type, char *word);
 void	token_add_back(t_mini *mini, t_token *new);
 void	remove_token(t_mini *mini, t_token *token);
 
-// ##################### Env Handler #################
+// 6: ################## Env Handler #################
 void	handle_env(t_mini *mini, char *env[]);
 void	handle_defaults(t_mini *mini);
 int		create_env(t_mini *mini, char *key, char *value, bool exported);
