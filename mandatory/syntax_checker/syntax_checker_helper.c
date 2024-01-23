@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_checker_helper.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:18:38 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/19 11:37:48 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/23 11:41:14 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,25 @@ int	check_quoate(t_token *token)
 		token = token->next;
 	}
 	return (0);
+}
+
+int	syntax_par(t_token *token)
+{
+	int	par_count;
+
+	par_count = 0;
+	while (token)
+	{
+		if (token->type == OPEN_PAR)
+			par_count++;
+		else if (token->type == CLOSE_PAR)
+			par_count--;
+		if (par_count < 0)
+			return (1);
+		token = token->next;
+	}
+	if (par_count == 0)
+		return (0);
+	else
+		return (1);
 }

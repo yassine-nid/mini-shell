@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
+#    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/01/19 11:42:19 by yzirri           ###   ########.fr        #
+#    Updated: 2024/01/19 16:06:45 by ynidkouc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,9 @@ READER_DIR = ./mandatory/commands_reader/
 TOKENIZER_FILES = tokenizer_utils.c tokenizer.c
 TOKENIZER_DIR = ./mandatory/tokenizer/
 
+#	-Build Tree
+TREE_FILES = build_tree.c build_tree_helpers.c
+TREE_DIR = ./mandatory/build_tree/
 
 ########################################
 #	-Utils
@@ -72,7 +75,7 @@ TESTS_DIR = ./mandatory/tests/
 OBJ_FILES = $(SRC_FILES:.c=.o) $(UTILS_FILES:.c=.o) $(CLEANUP_FILES:.c=.o) \
 			$(READER_FILES:.c=.o) $(TESTS_FILES:.c=.o) $(SYNTAX_FILES:.c=.o) \
 			$(ENV_FILES:.c=.o) $(EXPAND_FILES:.c=.o) $(BUILTIN_FILES:.c=.o) \
-			$(TOKENIZER_FILES:.c=.o)
+			$(TOKENIZER_FILES:.c=.o) $(TREE_FILES:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 all: $(NAME)
@@ -123,6 +126,10 @@ $(OBJ_DIR)%.o: $(TOKENIZER_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
+$(OBJ_DIR)%.o: $(TREE_DIR)%.c $(TREE_DIR)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	
 clean:
 	@rm -f $(OBJ)
 

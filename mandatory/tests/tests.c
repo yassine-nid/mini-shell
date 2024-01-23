@@ -91,3 +91,31 @@ void	print_envs(t_mini *mini)
 		env = env->next;
 	}
 }
+
+void	print_tree(t_tree *tree, int level) // to delete
+{
+	if (!tree)
+		return ;
+	for (int i = 0; i < level; i++) {
+        printf("  ");
+    }
+	printTokenTypeWithColor(tree->node);
+	printf(": %d", level);
+	if (tree->node->type == WORD)
+	{
+		t_token *token = tree->node;
+		printf("\t: ");
+		printf("[");
+		while (token && token->type == WORD)
+		{
+			printf("%s", token->word);
+			if (token->next && token->next->type == WORD)
+				printf(" ");
+			token = token->next;
+		}
+		printf("]");
+	}
+	printf("\n");
+	print_tree(tree->left, level + 1);
+	print_tree(tree->right, level + 1);
+}

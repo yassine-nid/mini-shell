@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/19 11:39:05 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/23 11:24:21 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ void	read_commands(t_mini *mini)
 					reseted = true;
 				token = token->next;
 			}
-			
+			t_token *tokens = *mini->token;
+			mini->tree = build_tree(mini->token, mini);
+			*mini->token = tokens;
+			print_tree(mini->tree, 0);
+			free_tree(&mini->tree);
 		}
 		free(line);
 		line = NULL;

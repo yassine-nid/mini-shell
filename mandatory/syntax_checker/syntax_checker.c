@@ -6,32 +6,11 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:59:31 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/15 11:13:46 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:40:58 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static int	syntax_par(t_token *token)
-{
-	int	par_count;
-
-	par_count = 0;
-	while (token)
-	{
-		if (token->type == OPEN_PAR)
-			par_count++;
-		else if (token->type == CLOSE_PAR)
-			par_count--;
-		if (par_count < 0)
-			return (1);
-		token = token->next;
-	}
-	if (par_count == 0)
-		return (0);
-	else
-		return (1);
-}
 
 static int	check_pipe_or(t_token *token)
 {

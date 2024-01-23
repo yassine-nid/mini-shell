@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:11:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 20:33:30 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/23 11:15:04 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,27 @@ void	cleanup_exit(t_mini *mini, int code)
 {
 	clean_tree(mini);
 	token_cleanup(mini);
+	free_tree(&mini->tree);
 	exit(code);
+}
+
+void	free_tree(t_tree **tree)
+{
+	if (!*tree)
+		return;
+	if ((*tree)->left)
+		free_tree(&(*tree)->left);
+	if ((*tree)->right)
+		free_tree(&(*tree)->right);
+	free(*tree);
+	*tree = NULL;
 }
 
 void	clean_exit(t_mini *mini, char *error, int code)
 {
 	clean_tree(mini);
 	token_cleanup(mini);
+	free_tree(&mini->tree);
 	if (!error)
 		perror("minishell");
 	else

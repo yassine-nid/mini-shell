@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/19 12:34:59 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/23 11:40:48 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_mini
 {
 	t_env			**env;
 	t_token			**token;
+	t_tree			*tree;
 	int				exit_status;
 }	t_mini;
 
@@ -85,6 +86,7 @@ void	m_expand_status(t_mini *mini, t_token *token, int index);
 int		syntax_checker(t_token *token);
 int		check_word(t_token *token);
 int		check_quoate(t_token *token);
+int		syntax_par(t_token *token);
 
 // 4: ################ Commands reader ###############
 void	read_commands(t_mini *mini);
@@ -104,6 +106,10 @@ char	*env_atoi(char *old);
 char	*get_key(char *str, bool *malloc_failed);
 char	*get_value(char *str, bool *malloc_failed);
 
+// ############ Build Tree #############
+t_tree	*build_tree(t_token **token, t_mini *mini);
+t_tree	*creat_node(t_token *token, t_mini *mini);
+int		get_priority(t_token *token);
 
 // ############################################### MODified ####################################
 int		do_echo(t_token *token);
@@ -132,17 +138,18 @@ int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		is_alpha_num(int c);
 
+
 // ############ Cleanup #############
 void	clean_exit(t_mini *mini, char *error, int code);
 void	cleanup_exit(t_mini *mini, int code);
 void	clean_tree(t_mini *mini);
 void	env_cleanup(t_mini *mini);
 void	print_mini_error(t_mini *mini, char *command, char *arg, char *error);
+void	free_tree(t_tree **tree);
 
 // ########### Commands reader ###########
 void	read_commands(t_mini *mini);
 bool	is_space(char c);
-
 void	token_cleanup(t_mini *mini);
 
 // ############### TEST ################
@@ -150,5 +157,6 @@ void	print_tokens(t_mini *mini);
 void	print_envs(t_mini *mini);
 void	expand_tokens(t_mini *mini);
 void 	printTokenTypeWithColor(t_token *token);
+void	print_tree(t_tree *tree, int level);
 
 #endif
