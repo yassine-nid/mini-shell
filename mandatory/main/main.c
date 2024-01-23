@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:59 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/18 17:33:09 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/23 12:36:48 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	main(int argc, char *argv[], char *envp[])
 	handle_env(&mini, envp);
 	listen_to_signals(&mini);
 	read_commands(&mini);
+	cleanup_exit(&mini, 0);
 	return (0);
 }

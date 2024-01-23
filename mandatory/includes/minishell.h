@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/23 11:40:48 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:36:42 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ int		is_alpha_num(int c);
 // ############ Cleanup #############
 void	clean_exit(t_mini *mini, char *error, int code);
 void	cleanup_exit(t_mini *mini, int code);
-void	clean_tree(t_mini *mini);
 void	env_cleanup(t_mini *mini);
 void	print_mini_error(t_mini *mini, char *command, char *arg, char *error);
 void	free_tree(t_tree **tree);

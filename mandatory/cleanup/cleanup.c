@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:11:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/23 11:15:04 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:36:32 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,8 @@ void	env_cleanup(t_mini *mini)
 	mini->env = NULL;
 }
 
-void	clean_tree(t_mini *mini)
-{
-	// if (!mini || !mini->env);
-	(void)mini;
-}
-
 void	cleanup_exit(t_mini *mini, int code)
 {
-	clean_tree(mini);
 	token_cleanup(mini);
 	free_tree(&mini->tree);
 	exit(code);
@@ -79,7 +72,6 @@ void	free_tree(t_tree **tree)
 
 void	clean_exit(t_mini *mini, char *error, int code)
 {
-	clean_tree(mini);
 	token_cleanup(mini);
 	free_tree(&mini->tree);
 	if (!error)
