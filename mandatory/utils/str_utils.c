@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:39:45 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/19 08:11:43 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/28 08:58:42 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,40 @@ int	ft_putstr_fd(char *s, int fd)
 		s++;
 	}
 	return (return_val);
+}
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	if (!s || fd < 0)
+		return ;
+	ft_putstr_fd(s, fd);
+	write(fd, "\n", 1);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	size;
+	char	*p;
+	size_t	i;
+
+	if (!s1 || !s2)
+		return (ft_strdup(""));
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	p = (char *) malloc (size * sizeof (char));
+	if (!p)
+		return (0);
+	i = 0;
+	while (*s1)
+	{
+		p[i++] = *s1;
+		s1++;
+	}
+	while (*s2)
+	{
+		p[i++] = *s2;
+		s2++;
+	}
+	p[i] = '\0';
+	return (p);
 }
 

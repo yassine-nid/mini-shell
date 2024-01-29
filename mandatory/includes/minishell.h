@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/23 12:36:42 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/28 09:00:20 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 
 # include <errno.h>
 # include <signal.h>
+
+# include <sys/types.h>
+# include <sys/wait.h>
+
+# include <fcntl.h>
 
 # define DEFAULT_PATH "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
 # define NOT_VALID "not a valid identifier"
@@ -61,6 +66,7 @@ typedef struct s_token
 typedef struct s_tree
 {
     t_token			*node;
+	int				level;
     struct s_tree	*left;
     struct s_tree	*right;
 }	t_tree;
@@ -70,6 +76,8 @@ typedef struct s_mini
 	t_env			**env;
 	t_token			**token;
 	t_tree			*tree;
+	int				std_out;
+	int				std_in;
 	int				exit_status;
 }	t_mini;
 
@@ -107,8 +115,8 @@ char	*get_key(char *str, bool *malloc_failed);
 char	*get_value(char *str, bool *malloc_failed);
 
 // ############ Build Tree #############
-t_tree	*build_tree(t_token **token, t_mini *mini);
-t_tree	*creat_node(t_token *token, t_mini *mini);
+t_tree	*build_tree(t_token **token, t_mini *mini, int level);
+t_tree	*creat_node(t_token *token, t_mini *mini, int level);
 int		get_priority(t_token *token);
 
 // ############################################### MODified ####################################
@@ -120,6 +128,7 @@ int		do_export(t_mini *mini, t_token *token);
 void	ft_lstadd_back(t_env **lst, t_env *new);
 t_env	*ft_lstnew(void *key, void *value);
 void	ft_lstiter(t_env *lst, void (*f)());
+char	**ft_split(char const *s, char c);
 
 bool    ft_strcmp(const char *s1, const char *s2);
 char	*ft_itoa(int n);
@@ -137,6 +146,11 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		is_alpha_num(int c);
+char	**ft_split(char const *s, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+void	*ft_calloc(size_t count, size_t size);
+void	ft_putendl_fd(char *s, int fd);
 
 
 // ############ Cleanup #############
@@ -145,11 +159,21 @@ void	cleanup_exit(t_mini *mini, int code);
 void	env_cleanup(t_mini *mini);
 void	print_mini_error(t_mini *mini, char *command, char *arg, char *error);
 void	free_tree(t_tree **tree);
+void	ft_free(char **p);
+void	ft_err(int err_nb, char *str, int ext, char **to_free);
 
 // ########### Commands reader ###########
 void	read_commands(t_mini *mini);
 bool	is_space(char c);
 void	token_cleanup(t_mini *mini);
+
+// ############### Execution ################
+int	execute_tree(t_mini *mini);
+int	execute_type(t_mini *mini, t_tree *root, int level);
+int	execute_cmd(t_mini *mini, t_tree *root, int level);
+int	execute_and(t_mini *mini, t_tree *root, int level);
+int	execute_or(t_mini *mini, t_tree *root, int level);
+int	execute_pip(t_mini *mini, t_tree *root, int level);
 
 // ############### TEST ################
 void	print_tokens(t_mini *mini);

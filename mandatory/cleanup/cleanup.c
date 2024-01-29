@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:11:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/23 12:36:32 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/28 08:34:17 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	clean_exit(t_mini *mini, char *error, int code)
 		perror("minishell");
 	else
 		ft_putstr_fd(error, 2);
+	close(mini->std_in);
+	close(mini->std_out);
 	system("leaks minishell");
 	exit(code);
 }
@@ -93,4 +95,38 @@ void	print_mini_error(t_mini *mini, char *command, char *arg, char *error)
 	ft_putstr_fd("\': ", 2);
 	ft_putstr_fd(error, 2);
 	ft_putstr_fd("\n", 2);
+}
+
+void	ft_free(char **p)
+{
+	int	i;
+
+	if (!p)
+		return ;
+	i = -1;
+	while (p[++i])
+		free(p[i]);
+	free(p);
+	p = NULL;
+}
+
+void	ft_err(int err_nb, char *str, int ext, char **to_free)
+{
+	if (err_nb == -1)
+	{
+		if (str)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(str, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
+		}
+		else
+			perror("minishell");
+		if (to_free)
+			ft_free(to_free);
+		if (ext)
+			exit(ext);
+	}
 }

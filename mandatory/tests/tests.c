@@ -100,7 +100,7 @@ void	print_tree(t_tree *tree, int level) // to delete
         printf("  ");
     }
 	printTokenTypeWithColor(tree->node);
-	printf(": %d", level);
+	printf(": %d-%d", level, tree->level);
 	if (tree->node->type == WORD)
 	{
 		t_token *token = tree->node;

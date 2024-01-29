@@ -6,13 +6,13 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:44:29 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/23 11:30:07 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:37:59 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_tree	*creat_node(t_token *token, t_mini *mini)
+t_tree	*creat_node(t_token *token, t_mini *mini, int level)
 {
 	t_tree	*new_node;
 
@@ -20,6 +20,7 @@ t_tree	*creat_node(t_token *token, t_mini *mini)
 	if (!new_node)
 		return (clean_exit(mini, NULL, errno), NULL);
 	new_node->node = token;
+	new_node->level = level;
 	new_node->left = NULL;
 	new_node->right = NULL;
 	return (new_node);

@@ -6,7 +6,7 @@
 #    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/01/19 16:06:45 by ynidkouc         ###   ########.fr        #
+#    Updated: 2024/01/28 08:33:04 by ynidkouc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ TREE_DIR = ./mandatory/build_tree/
 
 ########################################
 #	-Utils
-UTILS_FILES = utils_lst.c basic_libft.c str_utils.c basic_libft2.c
+UTILS_FILES = utils_lst.c basic_libft.c str_utils.c basic_libft2.c ft_split.c ft_split_utiles.c
 UTILS_DIR = ./mandatory/utils/
 
 #	-Cleanup
@@ -67,6 +67,10 @@ ENV_DIR = ./mandatory/env_handler/
 BUILTIN_FILES = m_echo.c m_export.c
 BUILTIN_DIR = ./mandatory/builtins/
 
+#	-Execution
+EXECUTION_FILES = execute_and.c  execute_cmd.c  execute_or.c   execute_pipe.c execute_tree.c
+EXECUTION_DIR = ./mandatory/execution/
+
 #	-Tests
 TESTS_FILES = tests.c
 TESTS_DIR = ./mandatory/tests/
@@ -75,7 +79,7 @@ TESTS_DIR = ./mandatory/tests/
 OBJ_FILES = $(SRC_FILES:.c=.o) $(UTILS_FILES:.c=.o) $(CLEANUP_FILES:.c=.o) \
 			$(READER_FILES:.c=.o) $(TESTS_FILES:.c=.o) $(SYNTAX_FILES:.c=.o) \
 			$(ENV_FILES:.c=.o) $(EXPAND_FILES:.c=.o) $(BUILTIN_FILES:.c=.o) \
-			$(TOKENIZER_FILES:.c=.o) $(TREE_FILES:.c=.o)
+			$(TOKENIZER_FILES:.c=.o) $(TREE_FILES:.c=.o) $(EXECUTION_FILES:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 all: $(NAME)
@@ -129,7 +133,11 @@ $(OBJ_DIR)%.o: $(TOKENIZER_DIR)%.c $(HEAD_DIR)
 $(OBJ_DIR)%.o: $(TREE_DIR)%.c $(TREE_DIR)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
-	
+
+$(OBJ_DIR)%.o: $(EXECUTION_DIR)%.c $(EXECUTION_DIR)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+
 clean:
 	@rm -f $(OBJ)
 
