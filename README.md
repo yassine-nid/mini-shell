@@ -1,3 +1,1 @@
 # mini-shell
-yassine
-nice
