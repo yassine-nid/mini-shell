@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:22:35 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/28 09:41:51 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/11 10:54:01 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	execute_or(t_mini *mini, t_tree *root, int level)
 {
 	int	status;
-	(void)	mini;
 
 	status = execute_type(mini, root->left, level);
 	if (status)

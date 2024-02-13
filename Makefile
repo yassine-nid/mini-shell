@@ -6,7 +6,7 @@
 #    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/01/28 08:33:04 by ynidkouc         ###   ########.fr        #
+#    Updated: 2024/02/13 09:44:02 by ynidkouc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,8 @@ BUILTIN_FILES = m_echo.c m_export.c
 BUILTIN_DIR = ./mandatory/builtins/
 
 #	-Execution
-EXECUTION_FILES = execute_and.c  execute_cmd.c  execute_or.c   execute_pipe.c execute_tree.c
+EXECUTION_FILES =	execute_and.c  execute_cmd.c  execute_or.c   execute_pipe.c execute_tree.c \
+					redaractions.c child_exe.c execute_helpers.c here_doc.c
 EXECUTION_DIR = ./mandatory/execution/
 
 #	-Tests

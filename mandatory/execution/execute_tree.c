@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:01:02 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/28 08:40:12 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 09:38:16 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int	execute_tree(t_mini *mini)
 	t_tree	*root;
 
 	root = mini->tree;
-	return(execute_type(mini, root, 0));
+	mini->exit_status = execute_type(mini, root, 0);
+	return (mini->exit_status);
 }

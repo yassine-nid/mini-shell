@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:11:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/28 08:34:17 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 08:01:07 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,27 @@ void	clean_exit(t_mini *mini, char *error, int code)
 		ft_putstr_fd(error, 2);
 	close(mini->std_in);
 	close(mini->std_out);
-	system("leaks minishell");
+	// system("leaks minishell");
+	exit(code);
+}
+
+void		clean_exit_two(t_mini *mini, char **error, int code)
+{
+	if (!*error)
+		perror("minishell");
+	else
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(*error, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+	}
+	token_cleanup(mini);
+	free_tree(&mini->tree);
+	close(mini->std_in);
+	close(mini->std_out);
+	free(error);
 	exit(code);
 }
 

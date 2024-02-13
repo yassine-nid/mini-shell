@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_libft.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:58:42 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/14 16:17:24 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/11 10:38:47 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,22 @@ bool	is_space(char c)
 	if (c == '\r' || c == ' ')
 		return (true);
 	return (false);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	const char	*p;
+	char		ch;
+
+	ch = (char) c;
+	p = s;
+	while (*p)
+	{
+		if (*p == ch)
+			return ((char *) p);
+		p++;
+	}
+	if (ch == '\0')
+		return ((char *) p);
+	return (0);
 }

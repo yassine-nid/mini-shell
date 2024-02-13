@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_and.c                                      :+:      :+:    :+:   */
+/*   execute_helpers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 13:22:48 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/13 09:35:12 by ynidkouc         ###   ########.fr       */
+/*   Created: 2024/02/13 08:32:39 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/02/13 09:32:00 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	execute_and(t_mini *mini, t_tree *root, int level)
+char	**get_paths(t_mini *mini)
 {
-	int	status;
+	t_env	*env;
+	char	*result;
 
-	status = execute_type(mini, root->left, level);
-	if (!status)
-		status = execute_type(mini, root->right, level);
-	return (status);
+	env = *mini->env;
+	result = NULL;
+	while (env)
+	{
+		if (ft_strcmp(env->key, "PATH"))
+		{
+			result = env->value;
+			break ;
+		}
+		env = env->next;
+	}
+	return (ft_split(result, ':'));
 }

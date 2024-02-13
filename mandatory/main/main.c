@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:59 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/25 11:09:04 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:08:40 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ static void	init_vars(t_mini *mini)
 	mini->exit_status = 0;
 	mini->token = NULL;
 	mini->env = NULL;
-	mini->std_in = dup(STDIN_FILENO); // error protection needed
-	mini->std_out = dup(STDOUT_FILENO); // error protection needed
+	mini->std_in = dup(STDIN_FILENO);
+	if (mini->std_in == -1)
+		clean_exit(mini, NULL, errno);
+	mini->std_out = dup(STDOUT_FILENO);
+	if (mini->std_out == -1)
+		clean_exit(mini, NULL, errno);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -27,6 +31,9 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	(void)argv;
+	rl_catch_signals = 0;
+	if (!isatty(0))
+		return (printf("tty is required\n"), errno);
 	init_vars(&mini);
 	handle_env(&mini, envp);
 	listen_to_signals(&mini);
