@@ -70,17 +70,6 @@ void	print_tokens(t_mini *mini)
 	printf("\n");
 }
 
-void	expand_tokens(t_mini *mini)
-{
-	t_token *token = *mini->token;
-	while (token)
-	{
-		expand_token(mini, token);
-		token = token->next;
-	}
-	printf("\n");
-}
-
 void	print_envs(t_mini *mini)
 {
 	t_env *env = *mini->env;

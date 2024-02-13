@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:05:55 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/19 12:05:36 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/11 13:42:32 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@ void	token_add_back(t_mini *mini, t_token *new)
 		temp_lst = temp_lst->next;
 	temp_lst->next = new;
 	new->preveus = temp_lst;
+}
+
+void	token_insert(t_token *new, t_token *preveus, int level)
+{
+	while (preveus && level-- > 0)
+		preveus = preveus->next;
+	if (!preveus)
+		return ;
+	new->preveus = preveus;
+	new->next = preveus->next;
+	preveus->next = new;
+	if (new->next)
+		new->next->preveus = new;
 }
 
 int	delimiter_check(char *line, t_type *delimiter, bool quotes)

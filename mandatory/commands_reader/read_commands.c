@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/13 11:34:05 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/13 13:27:52 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	read_commands(t_mini *mini)
 			add_history(line);
 			if (syntax_checker(*mini->token))
 			{
-				printf("Syntax Error\n");
+				printf("minishell: Syntax Error\n");
 				mini->exit_status = 258;
 			}
 			else

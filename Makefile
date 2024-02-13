@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/02/13 11:55:55 by yzirri           ###   ########.fr        #
+#    Updated: 2024/02/13 12:20:00 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC_FILES = main.c signals_handler.c
 SRC_DIR = ./mandatory/main/
 
 #	-Expander
-EXPAND_FILES = expander.c expander_word.c expander_quotes.c
+EXPAND_FILES = expand_star.c expander_quotes.c expander_word.c expander.c
 EXPAND_DIR = ./mandatory/expander/
 
 #	-Syntax Checker

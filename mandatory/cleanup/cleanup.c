@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:11:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/13 08:01:07 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:25:28 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ void	cleanup_exit(t_mini *mini, int code)
 {
 	token_cleanup(mini);
 	free_tree(&mini->tree);
+	free(mini->m_pwd);
+	close(mini->std_in);
+	close(mini->std_out);
 	exit(code);
 }
 
@@ -74,13 +77,13 @@ void	clean_exit(t_mini *mini, char *error, int code)
 {
 	token_cleanup(mini);
 	free_tree(&mini->tree);
+	free(mini->m_pwd);
 	if (!error)
 		perror("minishell");
 	else
 		ft_putstr_fd(error, 2);
 	close(mini->std_in);
 	close(mini->std_out);
-	// system("leaks minishell");
 	exit(code);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/13 12:03:09 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/13 13:15:26 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_token
 {
 	char			*word;
 	t_type			type;
+	bool			do_expand;
 	struct s_token	*preveus;
 	struct s_token	*next;
 }	t_token;
@@ -94,6 +95,7 @@ void	expand_token(t_mini *mini, t_token *token);
 void	m_expand_word(t_mini *mini, t_token *token, int index);
 void	m_remove_quotes(t_mini *mini, t_token *token);
 void	m_expand_status(t_mini *mini, t_token *token, int index);
+void	m_expand_star(t_mini *mini, t_token *token);
 
 // 3: ############### Syntax Checker #################
 int		syntax_checker(t_token *token);
@@ -110,6 +112,7 @@ int		delimiter_check(char *line, t_type *delimiter, bool quotes);
 t_token	*token_new(t_mini *mini, t_type type, char *word);
 void	token_add_back(t_mini *mini, t_token *new);
 void	remove_token(t_mini *mini, t_token *token);
+void	token_insert(t_token *new, t_token *preveus, int level);
 
 // 6: ################## Env Handler #################
 void	handle_env(t_mini *mini, char *env[]);
@@ -209,7 +212,6 @@ void	token_cleanup(t_mini *mini);
 // ############### TEST ################
 void	print_tokens(t_mini *mini);
 void	print_envs(t_mini *mini);
-void	expand_tokens(t_mini *mini);
 void 	printTokenTypeWithColor(t_token *token);
 void	print_tree(t_tree *tree, int level);
 

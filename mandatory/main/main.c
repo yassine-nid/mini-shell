@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:59 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/13 11:08:40 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:29:19 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	init_vars(t_mini *mini)
 	mini->exit_status = 0;
 	mini->token = NULL;
 	mini->env = NULL;
+	mini->m_pwd = NULL;
 	mini->std_in = dup(STDIN_FILENO);
 	if (mini->std_in == -1)
 		clean_exit(mini, NULL, errno);
