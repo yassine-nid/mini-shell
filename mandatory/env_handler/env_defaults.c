@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:34:49 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/19 12:14:58 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/01/25 13:29:54 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,5 @@ void	handle_defaults(t_mini *mini)
 		env = env->next;
 	}
 	add_defaults(mini, path_exists, shlvl_exists, oldpwd_exists);
+	update_pwd(mini, true);
 }

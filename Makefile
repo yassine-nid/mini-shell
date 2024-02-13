@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
+#    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/02/13 09:44:02 by ynidkouc         ###   ########.fr        #
+#    Updated: 2024/02/13 11:55:55 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,20 +56,18 @@ UTILS_DIR = ./mandatory/utils/
 CLEANUP_FILES = cleanup.c
 CLEANUP_DIR = ./mandatory/cleanup/
 
-
-
 #	-Env Handler
 ENV_FILES = env_handler.c env_defaults.c env_utils.c
 ENV_DIR = ./mandatory/env_handler/
 
-
 #	-builtins
-BUILTIN_FILES = m_echo.c m_export.c
+BUILTIN_FILES = builtins_utils.c m_cd.c m_echo.c m_env.c m_exit.c m_export.c \
+				m_pwd_init.c m_pwd.c m_unset.c
 BUILTIN_DIR = ./mandatory/builtins/
 
 #	-Execution
 EXECUTION_FILES =	execute_and.c  execute_cmd.c  execute_or.c   execute_pipe.c execute_tree.c \
-					redaractions.c child_exe.c execute_helpers.c here_doc.c
+					redaractions.c child_exe.c execute_helpers.c here_doc.c excution_utils.c
 EXECUTION_DIR = ./mandatory/execution/
 
 #	-Tests

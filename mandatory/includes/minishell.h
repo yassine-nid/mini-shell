@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/13 09:44:13 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:03:09 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,15 @@
 
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 
 # include <fcntl.h>
 
+# include <limits.h>
+# include <dirent.h>
+
 # define DEFAULT_PATH "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
-# define NOT_VALID "not a valid identifier"
+# define INVALID "not a valid identifier"
 
 typedef struct s_env
 {
@@ -79,6 +83,7 @@ typedef struct s_mini
 	int				std_out;
 	int				std_in;
 	int				exit_status;
+	char			*m_pwd;
 }	t_mini;
 
 // 1: ##################### Main #####################
@@ -119,6 +124,41 @@ t_tree	*build_tree(t_token **token, t_mini *mini, int level);
 t_tree	*creat_node(t_token *token, t_mini *mini, int level);
 int		get_priority(t_token *token);
 
+// ############### Execution ################
+int		execute_tree(t_mini *mini);
+int		execute_type(t_mini *mini, t_tree *root, int level);
+int		execute_cmd(t_mini *mini, t_tree *root, int level);
+int		execute_and(t_mini *mini, t_tree *root, int level);
+int		execute_or(t_mini *mini, t_tree *root, int level);
+int		execute_pip(t_mini *mini, t_tree *root, int level);
+void	child_exe(t_tree *root, t_mini *mini);
+char	**get_cmd(t_token *token);
+void	reset_std_in_out(t_mini *mini);
+char	**get_paths(t_mini *mini);
+bool	is_builtin(t_token *token);
+int	excute_builtin(t_mini *mini, t_token *token, int level);
+
+// ############### Redirection ################
+int		red_in(t_token *token, t_mini *mini);
+int		red_out(t_token *token, t_mini *mini);
+int		red_ap_out(t_token *token, t_mini *mini);
+int		here_doc(t_token *token, t_mini *mini);
+int		red_handle(t_token *token, t_mini *mini);
+
+// ################### Builtins ##################
+int		do_echo(t_token *token);
+int		do_export(t_mini *mini, t_token *token);
+int		do_unset(t_mini *mini, t_token *token);
+int		do_env(t_mini *mini, t_token *token);
+int		do_exit(t_mini *mini, t_token *token, int lvl);
+int		do_pwd(t_mini *mini, t_token *token);
+int		do_cd(t_mini *mini, t_token *token);
+t_token	*get_next_arg(t_token *token);
+bool	update_env_pwd(t_mini *mini);
+char	*get_combined_path(t_mini *mini, t_token *token);
+int		update_pwd(t_mini *mini, bool is_init);
+int		m_print_dir_error(bool is_pwd);;
+
 // ############################################### MODified ####################################
 int		do_echo(t_token *token);
 int		do_export(t_mini *mini, t_token *token);
@@ -129,13 +169,10 @@ void	ft_lstadd_back(t_env **lst, t_env *new);
 t_env	*ft_lstnew(void *key, void *value);
 void	ft_lstiter(t_env *lst, void (*f)());
 char	**ft_split(char const *s, char c);
-
 bool    ft_strcmp(const char *s1, const char *s2);
 char	*ft_itoa(int n);
-
 int		ft_putstr_fd(char *s, int fd);
 bool    ft_strcmp_no_case(const char *s1, const char *s2);
-
 bool	is_str_alpha_num(char *str);
 
 // ############# Basic Libft ###############
@@ -168,24 +205,6 @@ void	read_commands(t_mini *mini);
 bool	is_space(char c);
 void	token_cleanup(t_mini *mini);
 
-// ############### Execution ################
-int		execute_tree(t_mini *mini);
-int		execute_type(t_mini *mini, t_tree *root, int level);
-int		execute_cmd(t_mini *mini, t_tree *root, int level);
-int		execute_and(t_mini *mini, t_tree *root, int level);
-int		execute_or(t_mini *mini, t_tree *root, int level);
-int		execute_pip(t_mini *mini, t_tree *root, int level);
-void	child_exe(t_tree *root, t_mini *mini);
-char	**get_cmd(t_token *token);
-void	reset_std_in_out(t_mini *mini);
-char	**get_paths(t_mini *mini);
-
-// ############### Redaractions ################
-int		red_in(t_token *token, t_mini *mini);
-int		red_out(t_token *token, t_mini *mini);
-int		red_ap_out(t_token *token, t_mini *mini);
-int		here_doc(t_token *token, t_mini *mini);
-int		red_handle(t_token *token, t_mini *mini);
 
 // ############### TEST ################
 void	print_tokens(t_mini *mini);

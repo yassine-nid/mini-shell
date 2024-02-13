@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:23:59 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/13 09:35:57 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:02:22 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,18 @@ int	execute_exev(t_tree *root, t_mini *mini)
 	return (WEXITSTATUS(state));
 }
 
-int	execute_cmd(t_mini *mini, t_tree *root, int level)
+int	execute_cmd(t_mini *mini, t_tree *root, int lvl)
 {
 	int		state;
-	(void)	level;
 
 	if (!root)
 		return (0);
 	state = red_handle(root->node, mini);
 	if (state)
 		return (reset_std_in_out(mini), state);
-	// if (is_built_in(mini, root->node))
-	// {
-	// 	state = excute_builtin(mini, root->node, level);
-	// 	return (reset_std_in_out(mini), state);
-	// }
-	// else
+	if (is_builtin(root->node))
+		state = excute_builtin(mini, root->node, lvl);
+	else
 		state = execute_exev(root, mini);
 	reset_std_in_out(mini);
 	return (state);
