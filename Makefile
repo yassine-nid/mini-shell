@@ -6,7 +6,7 @@
 #    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/02/13 12:20:00 by yzirri           ###   ########.fr        #
+#    Updated: 2024/02/13 13:39:55 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC_FILES = main.c signals_handler.c
 SRC_DIR = ./mandatory/main/
 
 #	-Expander
-EXPAND_FILES = expand_star.c expander_quotes.c expander_word.c expander.c
+EXPAND_FILES = expand_star.c expander_quotes.c expander_word.c expander.c expand_getcmd.c
 EXPAND_DIR = ./mandatory/expander/
 
 #	-Syntax Checker
@@ -70,13 +70,9 @@ EXECUTION_FILES =	execute_and.c  execute_cmd.c  execute_or.c   execute_pipe.c ex
 					redaractions.c child_exe.c execute_helpers.c here_doc.c excution_utils.c
 EXECUTION_DIR = ./mandatory/execution/
 
-#	-Tests
-TESTS_FILES = tests.c
-TESTS_DIR = ./mandatory/tests/
-
 
 OBJ_FILES = $(SRC_FILES:.c=.o) $(UTILS_FILES:.c=.o) $(CLEANUP_FILES:.c=.o) \
-			$(READER_FILES:.c=.o) $(TESTS_FILES:.c=.o) $(SYNTAX_FILES:.c=.o) \
+			$(READER_FILES:.c=.o) $(SYNTAX_FILES:.c=.o) \
 			$(ENV_FILES:.c=.o) $(EXPAND_FILES:.c=.o) $(BUILTIN_FILES:.c=.o) \
 			$(TOKENIZER_FILES:.c=.o) $(TREE_FILES:.c=.o) $(EXECUTION_FILES:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
@@ -106,10 +102,6 @@ $(OBJ_DIR)%.o: $(READER_DIR)%.c $(HEAD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(SYNTAX_DIR)%.c $(HEAD_DIR)
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
-
-$(OBJ_DIR)%.o: $(TESTS_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/13 13:15:26 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/13 14:30:15 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ int		execute_and(t_mini *mini, t_tree *root, int level);
 int		execute_or(t_mini *mini, t_tree *root, int level);
 int		execute_pip(t_mini *mini, t_tree *root, int level);
 void	child_exe(t_tree *root, t_mini *mini);
-char	**get_cmd(t_token *token);
 void	reset_std_in_out(t_mini *mini);
 char	**get_paths(t_mini *mini);
 bool	is_builtin(t_token *token);
@@ -209,10 +208,10 @@ bool	is_space(char c);
 void	token_cleanup(t_mini *mini);
 
 
-// ############### TEST ################
-void	print_tokens(t_mini *mini);
-void	print_envs(t_mini *mini);
-void 	printTokenTypeWithColor(t_token *token);
-void	print_tree(t_tree *tree, int level);
 
+
+
+
+
+char	**get_cmd(t_mini *mini, t_token *token);
 #endif

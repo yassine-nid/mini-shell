@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:15:44 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/28 08:10:57 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/13 14:50:36 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	path_append(t_mini *mini, char *append, int index, int indexj)
 
 int	do_cd(t_mini *mini, t_token *token)
 {
-	char	*combined_args;
+	char	*mpath;
 
 	update_oldpwd(mini);
 	if (token)
@@ -106,16 +106,14 @@ int	do_cd(t_mini *mini, t_token *token)
 		ft_putstr_fd("cd: usage: export [relative or absolute path]\n", 2);
 		return (1);
 	}
-	combined_args = get_combined_path(mini, token);
-	if (chdir(combined_args) == -1)
+	mpath = get_next_arg(token)->word;
+	if (chdir(mpath) == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		perror(combined_args);
-		free(combined_args);
+		perror(mpath);
 		return (errno);
 	}
 	if (update_pwd(mini, false) != 0)
-		path_append(mini, combined_args, 0, 0);
-	free(combined_args);
+		path_append(mini, mpath, 0, 0);
 	return (0);
 }

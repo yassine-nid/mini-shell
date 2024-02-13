@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 08:29:04 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/28 09:36:46 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/13 15:33:26 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_token	*get_next_arg(t_token *token)
 {
+	if (token && token->type == WORD && token->word[0] == '\0')
+		return (get_next_arg(token->next));
 	if (token && token->type == WORD)
 		return (token);
 	while (token)
@@ -70,46 +72,46 @@ int	m_print_dir_error(bool is_pwd)
 	return (errno);
 }
 
-static size_t	calculate_path_len(t_token *token)
-{
-	size_t	final_size;
+// static size_t	calculate_path_len(t_token *token)
+// {
+// 	size_t	final_size;
 
-	final_size = 0;
-	token = get_next_arg(token);
-	while (token)
-	{
-		if (final_size != 0)
-			final_size++;
-		if (token->word)
-			final_size += ft_strlen(token->word);
-		token = token->next;
-		token = get_next_arg(token);
-	}
-	return (final_size);
-}
+// 	final_size = 0;
+// 	token = get_next_arg(token);
+// 	while (token)
+// 	{
+// 		if (final_size != 0)
+// 			final_size++;
+// 		if (token->word)
+// 			final_size += ft_strlen(token->word);
+// 		token = token->next;
+// 		token = get_next_arg(token);
+// 	}
+// 	return (final_size);
+// }
 
-char	*get_combined_path(t_mini *mini, t_token *token)
-{
-	char	*final_dst;
-	size_t	final_size;
-	int		index;
-	int		jindex;
+// char	*get_combined_path(t_mini *mini, t_token *token)
+// {
+// 	char	*final_dst;
+// 	size_t	final_size;
+// 	int		index;
+// 	int		jindex;
 
-	final_size = calculate_path_len(token);
-	final_dst = malloc (sizeof * final_dst * (final_size + 1));
-	if (!final_dst)
-		clean_exit(mini, NULL, errno);
-	index = 0;
-	token = get_next_arg(token);
-	while (token)
-	{
-		jindex = 0;
-		if (index != 0)
-			final_dst[index++] = ' ';
-		while (token->word && token->word[jindex])
-			final_dst[index++] = token->word[jindex++];
-		token = get_next_arg(token->next);
-	}
-	final_dst[index] = '\0';
-	return (final_dst);
-}
+// 	final_size = calculate_path_len(token);
+// 	final_dst = malloc (sizeof * final_dst * (final_size + 1));
+// 	if (!final_dst)
+// 		clean_exit(mini, NULL, errno);
+// 	index = 0;
+// 	token = get_next_arg(token);
+// 	while (token)
+// 	{
+// 		jindex = 0;
+// 		if (index != 0)
+// 			final_dst[index++] = ' ';
+// 		while (token->word && token->word[jindex])
+// 			final_dst[index++] = token->word[jindex++];
+// 		token = get_next_arg(token->next);
+// 	}
+// 	final_dst[index] = '\0';
+// 	return (final_dst);
+// }

@@ -6,62 +6,11 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:23:59 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/13 12:02:22 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/13 13:39:20 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static int	count_words(t_token *token)
-{
-	int	nb_words;
-
-	nb_words = 0;
-	while (token && !(token->type >= PIPE && token->type <= CLOSE_PAR))
-	{
-		while (token && token->type == WORD)
-		{
-			nb_words++;
-			token = token->next;
-		}
-		if (token && (token->type == RED_IN || token->type == RED_OUT
-				|| token->type == RED_AP_OUT || token->type == H_DOC))
-		{
-			token = token->next;
-			if (token)
-				token = token->next;
-		}
-	}
-	return (nb_words);
-}
-
-char	**get_cmd(t_token *token)
-{
-	char	**cmd;
-	int		i;
-
-	i = 0;
-	cmd = (char **) malloc((count_words(token) + 1) * sizeof (char *));
-	if (!cmd)
-		return (cmd);
-	while (token && !(token->type >= PIPE && token->type <= CLOSE_PAR))
-	{
-		while (token && token->type == WORD)
-		{
-			cmd[i++] = token->word;
-			token = token->next;
-		}
-		if (token && (token->type == RED_IN || token->type == RED_OUT
-				|| token->type == RED_AP_OUT || token->type == H_DOC))
-		{
-			token = token->next;
-			if (token)
-				token = token->next;
-		}
-	}
-	cmd[i] = NULL;
-	return (cmd);
-}
 
 void	reset_std_in_out(t_mini *mini)
 {
