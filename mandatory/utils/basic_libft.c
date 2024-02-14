@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:58:42 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/11 10:38:47 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:43:42 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ char	*ft_strchr(const char *s, int c)
 
 	ch = (char) c;
 	p = s;
+	if (!s)
+		return (0);
 	while (*p)
 	{
 		if (*p == ch)
 			return ((char *) p);
 		p++;
 	}
-	if (ch == '\0')
-		return ((char *) p);
 	return (0);
 }

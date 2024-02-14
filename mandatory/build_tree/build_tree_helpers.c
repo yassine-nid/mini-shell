@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:44:29 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/24 11:37:59 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:39:22 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ int	get_priority(t_token *token)
 {
 	if (token->type == PIPE)
 		return (1);
-	else if (token->type == OR)
+	else if (token->type == OR || token->type == AND)
 		return (2);
-	else if (token->type == AND)
-		return (3);
 	else
 		return (0);
 }

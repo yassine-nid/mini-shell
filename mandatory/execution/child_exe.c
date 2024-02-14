@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_exe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:20:03 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/13 15:18:02 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/14 11:41:47 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static char	*cmd_access(char **cmd, t_mini *mini)
 	char	*path_cmd;
 	char	**paths;
 
+	if (!*cmd || !**cmd)
+		return (NULL);
 	cmd[0] = ft_strjoin("/", cmd[0]);
 	if (!cmd[0])
 		clean_exit(mini, NULL, errno);
@@ -103,12 +105,6 @@ void	child_exe(t_tree *root, t_mini *mini)
 	cmd = get_cmd(mini, root->node);
 	if (!cmd)
 		cleanup_exit(mini, 0);
-	if (!*cmd)
-	{
-		ft_putstr_fd("minishell: : command not found\n", 2);
-		cleanup_exit(mini, 127);
-		return ;
-	}
 	if (ft_strchr(*cmd, '/'))
 		cmd_path = *cmd;
 	else
@@ -116,7 +112,8 @@ void	child_exe(t_tree *root, t_mini *mini)
 	if (!cmd_path)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd[0] + 1, 2);
+		if (*cmd)
+			ft_putstr_fd(cmd[0] + 1, 2);
 		ft_putstr_fd(": command not found\n", 2);
 		cleanup_exit(mini, 127);
 	}

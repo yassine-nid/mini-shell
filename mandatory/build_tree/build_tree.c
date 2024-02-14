@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:00:21 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/24 11:30:06 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:40:10 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	add_to_tree(t_tree **root, t_tree *new_node)
 {
 	if (!*root)
 		*root = new_node;
-	else if (get_priority((*root)->node) < get_priority(new_node->node))
+	else if (get_priority((*root)->node) <= get_priority(new_node->node))
 	{
 		new_node->left = *root;
 		*root = new_node;
