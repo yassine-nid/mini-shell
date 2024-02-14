@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:19:35 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/19 12:22:19 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/14 10:49:02 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,12 @@ static void	init_envs(t_mini *mini, char *env[])
 	while (env[index])
 	{
 		get_key_val(mini, env[index], &key, &val);
-		if (create_env(mini, key, val, true) != 0)
+		if (ft_strcmp(key, "OLDPWD"))
+		{
+			free(key);
+			free(val);
+		}
+		else if(create_env(mini, key, val, true) != 0)
 		{
 			free(key);
 			free(val);

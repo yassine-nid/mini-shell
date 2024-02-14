@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/13 14:30:15 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/14 10:14:48 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ bool	update_env_pwd(t_mini *mini);
 char	*get_combined_path(t_mini *mini, t_token *token);
 int		update_pwd(t_mini *mini, bool is_init);
 int		m_print_dir_error(bool is_pwd);;
+int		export_add(t_env *env, char *new_val, bool append);
 
 // ############################################### MODified ####################################
 int		do_echo(t_token *token);

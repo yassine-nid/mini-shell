@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:22:01 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/28 09:39:39 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/14 10:33:40 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,27 @@ static char	*m_get_key(char *word)
 {
 	char	*key;
 	bool	m_failed;
+	int		index;
 
 	key = get_key(word, &m_failed);
 	if (m_failed)
 		return (NULL);
 	if (!key)
 		key = ft_strdup(word);
+	index = 0;
+	while (key[index])
+	{
+		if (key[index] == '+')
+		{
+			key[index] = '\0';
+			break ;
+		}
+		index++;
+	}
 	return (key);
 }
 
-static int	add_to_env(t_mini *mini, char *word)
+static int	add_to_env(t_mini *mini, char *word, bool append)
 {
 	bool	m_failed;
 	char	*key;
@@ -72,26 +83,32 @@ static int	add_to_env(t_mini *mini, char *word)
 	{
 		if (ft_strcmp(env->key, key))
 		{
-			if (env->value && (!value || !value[0]))
+			if (env->value && !value)
 				return (free(key), free(value), 0);
-			return (free(key), free(env->value), env->value = value, 0);
+			return (free(key), export_add(env, value, append));
 		}
 		env = env->next;
 	}
 	return (create_env(mini, key, value, true));
 }
 
-static int	is_valid_name(t_mini *mini, t_token *token, int *index)
+static int	is_valid_name(t_mini *mini, t_token *token, int *indx, bool *apend)
 {
-	if (!is_alpha_num(token->word[*index]))
+	*apend = false;
+	if (!is_alpha_num(token->word[*indx]))
 		return (print_mini_error(mini, "export", token->word, INVALID), 1);
-	while (token->word[*index])
+	while (token->word[*indx])
 	{
-		if (token->word[*index] == '=')
+		if (token->word[*indx] == '+' && token->word[*indx + 1] == '=')
+		{
+			*apend = true;
 			break ;
-		if (!is_alpha_num(token->word[*index]))
+		}
+		if (token->word[*indx] == '=')
+			break ;
+		if (!is_alpha_num(token->word[*indx]))
 			return (print_mini_error(mini, "export", token->word, INVALID), 1);
-		*index = *index + 1;
+		*indx = *indx + 1;
 	}
 	if (token->word[0] <= '9' && token->word[0] >= '0')
 		return (print_mini_error(mini, "export", token->word, INVALID), 1);
@@ -100,8 +117,9 @@ static int	is_valid_name(t_mini *mini, t_token *token, int *index)
 
 int	do_export(t_mini *mini, t_token *token)
 {
-	int	exit_stat;
-	int	index;
+	int		exit_stat;
+	int		index;
+	bool	append;
 
 	if (token)
 		token = get_next_arg(token->next);
@@ -113,11 +131,9 @@ int	do_export(t_mini *mini, t_token *token)
 		if (token->type != WORD)
 			break ;
 		index = 0;
-		while (is_space(token->word[index]))
-			index++;
-		if (is_valid_name(mini, token, &index) != 0)
+		if (is_valid_name(mini, token, &index, &append) != 0)
 			exit_stat = 1;
-		else if (add_to_env(mini, token->word) != 0)
+		else if (add_to_env(mini, token->word, append) != 0)
 			exit_stat = 1;
 		token = get_next_arg(token->next);
 	}

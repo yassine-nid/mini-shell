@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_utiles.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 08:26:59 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/01/28 08:29:03 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/14 09:55:47 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,4 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	*dst = '\0';
 	return (src_len);
 }
+
