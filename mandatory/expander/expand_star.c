@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:34:59 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/15 10:48:09 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/15 11:05:34 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	remove_empty_stars(t_token *token)
 			index += 2;
 			while (token->word[index_j])
 			{
-				token->word[index_j] =  token->word[index];
+				token->word[index_j] = token->word[index];
 				index_j++;
 				index++;
 			}
@@ -47,10 +47,38 @@ static void	remove_empty_stars(t_token *token)
 	}
 }
 
+static void	read_directory(t_mini *mini, t_token *token, DIR *dir, int *level)
+{
+	struct dirent	*entry;
+	t_token			*new_token;
+
+	*level = 0;
+	while (1)
+	{
+		entry = readdir(dir);
+		if (!entry)
+			return ;
+		if (*entry->d_name == '.')
+			continue ;
+		if (!is_match(mini, token->word, entry->d_name))
+			continue ;
+		new_token = token_new(mini, WORD, NULL);
+		new_token->do_expand = false;
+		new_token->word = ft_strdup(entry->d_name);
+		if (!new_token->word)
+		{
+			closedir(dir);
+			clean_exit(mini, NULL, errno);
+		}
+		token_insert(new_token, token, *level);
+		*level = *level + 1;
+	}
+}
+
 void	m_expand_star(t_mini *mini, t_token *token)
 {
+	int				level;
 	DIR				*dir;
-	struct dirent	*entry;
 
 	if (is_skip(token))
 		return ;
@@ -58,24 +86,7 @@ void	m_expand_star(t_mini *mini, t_token *token)
 	dir = opendir(".");
 	if (dir == NULL)
 		return ;
-	entry = readdir(dir);
-	int level = 0;
-	t_token *first = NULL;
-    while (entry != NULL)
-	{
-		if (*entry->d_name != '.' && is_match(mini, token->word, entry->d_name))
-		{
-			t_token *new_token = token_new(mini, WORD, NULL);
-			new_token->do_expand = false;
-			new_token->word = ft_strdup(entry->d_name);
-			if (!new_token->word)
-				clean_exit(mini, NULL, errno);
-			token_insert(new_token, token, level++);
-			if (!first)
-				first = new_token;
-		}
-		entry = readdir(dir);
-    }
+	read_directory(mini, token, dir, &level);
 	star_sort(level, token);
 	closedir(dir);
 }

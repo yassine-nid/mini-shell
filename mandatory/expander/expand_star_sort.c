@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_star_utils.c                                :+:      :+:    :+:   */
+/*   expand_star_sort.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:05:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/15 10:31:17 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/15 11:06:03 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ static void	clean_token(t_token *token)
 
 static int	m_cmp(const char *s1, const char *s2)
 {
-    if (s1 && !s2)
-        return (1);
+	if (s1 && !s2)
+		return (1);
 	else if (!s1 && s2)
 		return (-1);
 	else if (!s1 && !s2)
 		return (0);
-    while (*s1 && *s2)
-    {
-        if (*s1 != *s2)
-            return ((unsigned char)*s1 - (unsigned char)*s2);
-        s1++;
-        s2++;
-    }
-    return ((unsigned char)*s1 - (unsigned char)*s2);
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
 static bool	unit_sort(int lvl, t_token *current_token)
