@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/14 10:14:48 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/15 10:49:10 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	m_expand_word(t_mini *mini, t_token *token, int index);
 void	m_remove_quotes(t_mini *mini, t_token *token);
 void	m_expand_status(t_mini *mini, t_token *token, int index);
 void	m_expand_star(t_mini *mini, t_token *token);
+void	star_sort(int lvl, t_token *token);
+bool	is_match(t_mini *mini, char *token, char *dir);
 
 // 3: ############### Syntax Checker #################
 int		syntax_checker(t_token *token);
