@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excution_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:53:40 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/13 15:35:08 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/14 12:53:44 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ bool	is_builtin(t_token *token)
 int	excute_builtin(t_mini *mini, t_token *token, int level)
 {
 	t_token *tmp = token;
+
 	while (1)
 	{
 		token = get_next_arg(token);

@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:20:03 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/14 11:41:47 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:03:36 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*cmd_access(char **cmd, t_mini *mini)
 	char	*path_cmd;
 	char	**paths;
 
-	if (!*cmd || !**cmd)
+	if (!**cmd)
 		return (NULL);
 	cmd[0] = ft_strjoin("/", cmd[0]);
 	if (!cmd[0])

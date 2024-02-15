@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:39:37 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/14 11:42:36 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:50:00 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ char	**get_cmd(t_mini *mini, t_token *token)
 	cmd = malloc(sizeof * cmd * alloc_size);
 	if (!cmd)
 		clean_exit(mini, NULL, errno);
-	while (get_next_arg(token))
+	while (1)
 	{
+		token = get_next_arg(token);
+		if (!token)
+			break ;
 		cmd[i++] = token->word;
 		token = token->next;
 	}
