@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:34:59 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/15 11:05:34 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/15 11:25:48 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ static void	remove_empty_stars(t_token *token)
 {
 	int	index;
 	int	index_j;
+	int	old_index;
 
 	index = -1;
 	while (token->word[++index])
 	{
 		if (token->word[index] == '$' && token->word[index + 1] == '*')
 		{
+			old_index = index;
 			index_j = index;
 			index += 2;
 			while (token->word[index_j])
@@ -42,7 +44,7 @@ static void	remove_empty_stars(t_token *token)
 				index_j++;
 				index++;
 			}
-			index = -1;
+			index = old_index;
 		}
 	}
 }

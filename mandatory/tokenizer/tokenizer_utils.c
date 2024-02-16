@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:05:55 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/11 13:42:32 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/15 11:45:36 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_token	*token_new(t_mini *mini, t_type type, char *word)
 	result->preveus = NULL;
 	result->type = type;
 	result->word = word;
+	result->empty_env = false;
 	return (result);
 }
 

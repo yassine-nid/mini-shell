@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 08:29:04 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/14 10:29:57 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/15 11:10:00 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 t_token	*get_next_arg(t_token *token)
 {
-	if (token && token->type == WORD && token->word[0] == '\0')
-		return (get_next_arg(token->next));
 	if (token && token->type == WORD)
 		return (token);
 	while (token)

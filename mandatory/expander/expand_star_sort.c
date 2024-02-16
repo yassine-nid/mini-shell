@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:05:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/15 11:06:03 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/15 12:43:44 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,13 @@ static int	m_cmp(const char *s1, const char *s2)
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
-static bool	unit_sort(int lvl, t_token *current_token)
+static bool	unit_sort(int current_lvl, int lvl, t_token *current_token)
 {
-	int		current_lvl;
 	char	*temp_word;
 	t_token	*compare_token;
 
 	compare_token = current_token->next;
-	current_lvl = 0;
-	while (compare_token && current_lvl <= lvl)
+	while (compare_token && current_lvl < lvl)
 	{
 		if (m_cmp(compare_token->word, current_token->word) < 0)
 		{
@@ -75,10 +73,10 @@ void	star_sort(int lvl, t_token *token)
 		return ;
 	current_lvl = 0;
 	current_token = token->next;
-	while (current_token && current_lvl <= lvl)
+	while (current_token && current_lvl < lvl)
 	{
 		current_lvl++;
-		if (!unit_sort(current_lvl, current_token))
+		if (!unit_sort(current_lvl, lvl, current_token))
 		{
 			current_token = token->next;
 			current_lvl = 0;
