@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/18 11:42:03 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/18 14:56:04 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_token
 	char			*word;
 	t_type			type;
 	bool			do_expand;
+	bool			was_env;
 	bool			is_empty;
 	struct s_token	*preveus;
 	struct s_token	*next;

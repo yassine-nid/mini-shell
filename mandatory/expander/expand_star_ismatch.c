@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:34:08 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/18 08:50:32 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/18 15:18:12 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,6 @@ bool	is_match(t_mini *mini, char *token, char *dir)
 
 	tmp_t = ft_strdup(token);
 	tmp_d = ft_strdup(dir);
-	
-	// printf(" >>>> res [%s]\n", tmp_t);
-	// while (is_space(*tmp_t))
-	// 	tmp_t++;
-	// int test = 0;
-	// while (!is_space(tmp_t[test]))
-	// 	test++;
-	// tmp_t[test] = '\0';
-	// printf(" >>>> res [%s]\n", tmp_t);
-	
 	if (!tmp_t || !tmp_d)
 	{
 		free(tmp_t);

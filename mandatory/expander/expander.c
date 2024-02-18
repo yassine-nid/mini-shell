@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 08:44:02 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/18 12:13:39 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/18 15:26:20 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	remove_first_expanded(t_token *token)
 	if (token->next->next)
 		token->next->next->preveus = token;
 	token->next = token->next->next;
+	token->was_env = true;
 	free(temp);
 }
 
@@ -77,6 +78,7 @@ static void	stage_1_cleanup(t_mini *mini, t_token *token, int lvl, int start_i)
 		new_token->word = malloc(sizeof * new_token->word * (alloc_size + 1));
 		if (!new_token->word)
 			clean_exit(mini, NULL, errno);
+		new_token->was_env = true; // here
 		new_index = 0;
 		while (start_i < end_index)
 			new_token->word[new_index++] = token->word[start_i++];
@@ -105,14 +107,14 @@ void	expand_token(t_mini *mini, t_token *token)
 		index++;
 	}
 	stage_1_cleanup(mini, token, 0, 0);
-	printf("1 Cleanp== [%s]\n", token->word);
+	// printf("1 Cleanp== [%s]\n", token->word);
 	flag_empty_tokens(token);
-	printf("2 empty flags== [%s]\n", token->word);
+	// printf("2 empty flags== [%s]\n", token->word);
 	remove_empty_quotes(token);
-	printf("3 empty quotes== [%s]\n", token->word);
+	// printf("3 empty quotes== [%s]\n", token->word);
 	m_expand_star(mini, token);
-	printf("4 expand star== [%s]\n", token->word);
+	// printf("4 expand star== [%s]\n", token->word);
 	m_remove_quotes(mini, token);
-	printf("5 remove quotes== [%s]\n", token->word);
-	printf("\n");
+	// printf("5 remove quotes== [%s]\n", token->word);
+	// printf("\n");
 }

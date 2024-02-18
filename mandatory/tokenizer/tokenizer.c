@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:05:20 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/11 10:12:51 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/18 14:49:03 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	create_tokens(t_mini *mini, char *line)
 		new_token = token_new(mini, WORD, NULL);
 		if (!new_token)
 			clean_exit(mini, NULL, errno);
-		new_token->do_expand = true;
 		token_add_back(mini, new_token);
 		index += populate_token(mini, new_token, &line[index]);
 	}

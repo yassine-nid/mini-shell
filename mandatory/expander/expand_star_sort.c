@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:05:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/15 12:43:44 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/18 14:54:24 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	clean_token(t_token *token)
 	token->next = first->next;
 	if (token->next)
 		token->next->preveus = token;
+	token->do_expand = false;
 	free(first);
 }
 

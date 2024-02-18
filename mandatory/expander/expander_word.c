@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:15:41 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/18 11:03:49 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/18 15:25:09 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	m_expand_word(t_mini *mini, t_token *token, int index)
 	
 
 	// if (!env && is_e)
-	// 	token->empty_env = true;
+	// 	token->was_env = true;
 }
 
 void	m_expand_status(t_mini *mini, t_token *token, int index)

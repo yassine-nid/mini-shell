@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_exe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:20:03 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/14 14:03:36 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:35:14 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	child_exe(t_tree *root, t_mini *mini)
 	if (!cmd_path)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		if (*cmd)
+		if (**cmd)
 			ft_putstr_fd(cmd[0] + 1, 2);
 		ft_putstr_fd(": command not found\n", 2);
 		cleanup_exit(mini, 127);
