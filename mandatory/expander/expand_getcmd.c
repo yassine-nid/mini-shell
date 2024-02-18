@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:39:37 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/15 11:46:43 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/18 11:06:27 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	count_words(t_mini *mini, t_token *token)
 		token = get_next_arg(token);
 		if (!token)
 			break ;
-		// if (!token->empty_env)
+		if (!token->is_empty)
 			nb_words++;
 		expand_token(mini, token);
 		token = token->next;
@@ -46,7 +46,7 @@ char	**get_cmd(t_mini *mini, t_token *token)
 		token = get_next_arg(token);
 		if (!token)
 			break ;
-		if (!token->empty_env)
+		if (!token->is_empty)
 			cmd[i++] = token->word;
 		token = token->next;
 	}

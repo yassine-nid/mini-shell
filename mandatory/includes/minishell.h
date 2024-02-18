@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/15 11:40:17 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/18 11:42:03 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@
 # define DEFAULT_PATH "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
 # define INVALID "not a valid identifier"
 
+typedef enum s_quote_type
+{
+	single_q,
+	double_q,
+	any_q,
+}	t_quote_type;
+
 typedef struct s_env
 {
 	char			*key;
@@ -64,7 +71,7 @@ typedef struct s_token
 	char			*word;
 	t_type			type;
 	bool			do_expand;
-	bool			empty_env;
+	bool			is_empty;
 	struct s_token	*preveus;
 	struct s_token	*next;
 }	t_token;
@@ -99,6 +106,9 @@ void	m_expand_status(t_mini *mini, t_token *token, int index);
 void	m_expand_star(t_mini *mini, t_token *token);
 void	star_sort(int lvl, t_token *token);
 bool	is_match(t_mini *mini, char *token, char *dir);
+void	remove_empty_quotes(t_token *token);
+void	flag_empty_tokens(t_token *token);
+bool	is_inside_quote(char *str, int index, t_quote_type type);
 
 // 3: ############### Syntax Checker #################
 int		syntax_checker(t_token *token);

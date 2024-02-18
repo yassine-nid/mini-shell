@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:59:31 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/14 11:43:11 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:02:10 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static int	check_all_red(t_token *token)
 		return (1);
 	if (token->next->type != WORD)
 		return (1);
-	if (ft_strcmp(token->next->word, "*"))
-		return (2);
 	return (0);
 }
 

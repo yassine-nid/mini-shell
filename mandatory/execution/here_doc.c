@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 09:40:42 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/15 10:42:26 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:46:18 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	here_doc(t_token *token, t_mini *mini)
     sa.sa_flags = SA_RESTART;
     sigaction(SIGINT, &sa, NULL);
 	token = token->next;
+	m_remove_quotes(mini, token);
 	limiter = token->word;
 	if (dup2(mini->std_in, STDIN_FILENO) == -1)
 		clean_exit(mini, NULL, errno);
