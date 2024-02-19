@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:34:49 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/14 10:47:14 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/19 08:51:20 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	add_defaults(t_mini *mini, bool p_ex, bool shl_ex, bool	oldpwd_ex)
 		add_defaults_path(mini);
 	if (!shl_ex)
 		add_defaults_shlvl(mini);
-	// return ;
 	if (!oldpwd_ex)
 	{
 		t_key = ft_strdup("OLDPWD");

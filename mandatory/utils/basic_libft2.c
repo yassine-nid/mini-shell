@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_libft2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 08:09:54 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/13 09:39:09 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/19 09:11:07 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,3 +95,4 @@ bool	is_str_alpha_num(char *str)
 	}
 	return (true);
 }
+

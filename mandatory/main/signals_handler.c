@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:08:16 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/15 10:49:56 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/19 08:56:48 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	handle_signal(int sig, siginfo_t *info, void *context)
 {
 	(void)context;
 	(void)info;
-	// if (waitpid(-1, NULL, 0) == 0)
+	
 	if (waitpid(-1, NULL, 0) == 0)
 	{
 		write(1, "\n", 1);

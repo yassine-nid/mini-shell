@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:04:51 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/18 15:34:32 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/19 07:37:23 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,23 @@ int	red_ap_out(t_token *token, t_mini *mini)
 
 
 	token = token->next;
-	t_token *test_new = token_new(mini, WORD, NULL);
-	test_new->word = ft_strdup(token->word);
-	expand_token(mini, test_new);
-	if (!test_new->do_expand && test_new->next && !test_new->next->do_expand)
+	// t_token *test_new = token_new(mini, WORD, NULL);
+	// test_new->word = ft_strdup(token->word);
+	char *old = ft_strdup(token->word);
+	expand_token(mini, token);
+	if (!token->do_expand && token->next && !token->next->do_expand)
 	{
-		printf("bad red [%s]\n", token->word);
+		printf("bad red [%s]\n", old);
 		return (1);
 	}
-	if (test_new->was_env && test_new->next && test_new->next->was_env)
+	if (token->was_env && token->next && token->next->was_env)
 	{
-		printf("bad red env [%s]\n", token->word);
+		printf("bad red env [%s]\n", old);
 		return (1);
 	}
-	file = test_new->word;
+	file = token->word;
 	// free(test_new->word);
-	// free(test_new);
+	free(old);
 	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
 		return (ft_err(-1, file, 0, NULL), errno);

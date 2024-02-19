@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:15:41 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/18 15:25:09 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/19 08:07:16 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,6 @@ static char	*alloc(t_mini *mini, int len, char *env_value, bool free_src)
 	return (new_word);
 }
 
-// bool	is_empty_env()
-// {
-
-// }
-
 void	m_expand_word(t_mini *mini, t_token *token, int index)
 {
 	t_env	*env;
@@ -73,7 +68,6 @@ void	m_expand_word(t_mini *mini, t_token *token, int index)
 	int		ind;
 	char	*n_w;
 
-	// bool is_e = token->word && token->word[0] == '$';
 	env = is_env(mini, token->word, index, &skip_l);
 	if (env)
 		n_w = alloc(mini, ft_strlen(token->word) - (skip_l + 1), env->value, 0);
@@ -93,10 +87,6 @@ void	m_expand_word(t_mini *mini, t_token *token, int index)
 		n_w[ind] = token->word[index++ + skip_l + 1];
 	free(token->word);
 	token->word = n_w;
-	
-
-	// if (!env && is_e)
-	// 	token->was_env = true;
 }
 
 void	m_expand_status(t_mini *mini, t_token *token, int index)

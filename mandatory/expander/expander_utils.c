@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:21:52 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/18 14:31:58 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/19 07:29:48 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	flag_empty_tokens(t_token *token)
 	{
 		is_empty = true;
 		index = 0;
-		while (!token->is_empty && token->word[index])
+		while (token->type == WORD && !token->is_empty && token->word[index])
 		{
 			if (!is_space(token->word[index]))
 			{
