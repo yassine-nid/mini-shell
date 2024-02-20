@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 08:55:36 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/19 15:13:54 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,15 @@ void	read_commands(t_mini *mini)
 
 	while (1)
 	{
+		handle_signal(269, mini);
+		signal(SIGQUIT, (void (*)(int))handle_signal);
+		signal(SIGINT, (void (*)(int))handle_signal);
 		line = readline("minishell:$ ");
 		if (line == NULL)
+		{
+			write(1, "exit\n", 5);
 			cleanup_exit(mini, 10);
+		}
 		token_cleanup(mini);
 		if (line[0] != '\0')
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 09:11:12 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/19 10:59:46 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,13 @@ typedef struct s_mini
 	int				std_out;
 	int				std_in;
 	int				exit_status;
+	int				sig_int_recived;
 	char			*m_pwd;
 }	t_mini;
 
 // 1: ##################### Main #####################
-void	listen_to_signals(t_mini *mini);
+// void	listen_to_signals(t_mini *mini);
+void	handle_signal(int sig, t_mini *mini);
 
 // 2: ################## Expander ####################
 void	expand_token(t_mini *mini, t_token *token);

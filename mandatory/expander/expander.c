@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 08:44:02 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 08:06:46 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/20 10:46:12 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static bool	expand_varriable(t_mini *mini, t_token *token, int index, int *d_in)
 	{
 		*d_in = index;
 		if (is_alpha_num(word[index + 1]))
+		{
+			token->was_env = true;
 			return (m_expand_word(mini, token, index), true);
+		}
 		else if (word[index + 1] == '?')
 			return (m_expand_status(mini, token, index), true);
 	}

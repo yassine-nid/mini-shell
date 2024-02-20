@@ -3,21 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   redaractions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:04:51 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/19 07:37:23 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/20 10:54:33 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+int	ambiguous_red(t_token *token, char *old)
+{
+	if (!(!token->do_expand && token->next && !token->next->do_expand)
+	&& !(token->was_env && token->next && token->next->was_env)
+	&& !(token->was_env && token->is_empty))
+	{
+		return (0);
+	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(old, 2);
+	ft_putstr_fd(": ambiguous redirect\n", 2);
+	return (1);
+}
+
 int	red_in(t_token *token, t_mini *mini)
 {
 	char	*file;
 	int		fd;
+	char	*old;
+	
 
 	token = token->next;
+	old = ft_strdup(token->word);
+	expand_token(mini, token);
+	if (ambiguous_red(token, old))
+		return (free(old), 1);
 	file = token->word;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -35,8 +55,13 @@ int	red_out(t_token *token, t_mini *mini)
 {
 	char	*file;
 	int		fd;
+	char	*old;
 
 	token = token->next;
+	old = ft_strdup(token->word);
+	expand_token(mini, token);
+	if (ambiguous_red(token, old))
+		return (free(old), 1);
 	file = token->word;
 	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
@@ -50,29 +75,19 @@ int	red_out(t_token *token, t_mini *mini)
 	return (0);
 }
 
+
 int	red_ap_out(t_token *token, t_mini *mini)
 {
 	char	*file;
 	int		fd;
-
+	char	*old;
 
 	token = token->next;
-	// t_token *test_new = token_new(mini, WORD, NULL);
-	// test_new->word = ft_strdup(token->word);
-	char *old = ft_strdup(token->word);
+	old = ft_strdup(token->word);
 	expand_token(mini, token);
-	if (!token->do_expand && token->next && !token->next->do_expand)
-	{
-		printf("bad red [%s]\n", old);
-		return (1);
-	}
-	if (token->was_env && token->next && token->next->was_env)
-	{
-		printf("bad red env [%s]\n", old);
-		return (1);
-	}
+	if (ambiguous_red(token, old))
+		return (free(old), 1);
 	file = token->word;
-	// free(test_new->word);
 	free(old);
 	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)

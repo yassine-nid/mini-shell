@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 09:40:42 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/16 14:46:18 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/20 10:13:13 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int a = 0;
 
 static int	read_here_d(char *limiter)
 {
@@ -23,9 +21,8 @@ static int	read_here_d(char *limiter)
 	if (fd < 0)
 		return (ft_err(-1, ".minishell_tmp", 0, NULL), errno);
 	line = readline("> ");
-	while (line && !ft_strcmp(line, limiter) && !a)
+	while (line && !ft_strcmp(line, limiter))
 	{
-	printf("%d", a);
 		ft_putendl_fd(line, fd);
 		free(line);
 		line = readline("> ");
@@ -41,8 +38,8 @@ void	signal_here_doc(int sig)
 	if (sig == SIGINT)
 	{
 		rl_replace_line("", 1);
-		write(1, "\n", 1);
-		a = 1;
+		// write(1, "\n", 1);
+		// close (0);
 	}
 }
 
@@ -50,12 +47,8 @@ int	here_doc(t_token *token, t_mini *mini)
 {
 	int		fd;
 	char	*limiter;
-	struct	sigaction sa;
 
-	sa.sa_handler = signal_here_doc;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_RESTART;
-    sigaction(SIGINT, &sa, NULL);
+	signal(SIGINT, (void (*)(int))signal_here_doc);
 	token = token->next;
 	m_remove_quotes(mini, token);
 	limiter = token->word;
@@ -73,5 +66,6 @@ int	here_doc(t_token *token, t_mini *mini)
 		clean_exit(mini, NULL, errno);
 	}
 	ft_err(unlink("/tmp/.minishell_tmp"), NULL, 0, NULL);
+	// reset_std_in_out(mini);
 	return (close(fd), 0);
 }

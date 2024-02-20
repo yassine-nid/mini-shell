@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:23:59 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/16 11:12:39 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/20 08:28:19 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ int	execute_exev(t_tree *root, t_mini *mini)
 		child_exe(root, mini);
 	else
 		waitpid(pid, &state, 0);
+	if (WIFSIGNALED(state))
+	{
+		if (state == 2)
+			write(1, "\n", 1);
+		else if (state == 3)
+			write(1, "Quit: 3\n", 10);
+		return (state + 128);
+	}
 	return (WEXITSTATUS(state));
 }
 
