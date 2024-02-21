@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:39:45 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/15 09:28:35 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 09:14:08 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-bool	ft_strcmp(const char *s1, const char *s2)
-{
-	if (!s1 && s2)
-		return (false);
-	if (s1 && !s2)
-		return (false);
-	while (*s1 && *s2)
-	{
-		if (*s1 != *s2)
-			return (false);
-		s1++;
-		s2++;
-	}
-	return ((unsigned char)*s1 == (unsigned char)*s2);
-}
 
 int	ft_tolower(int c)
 {

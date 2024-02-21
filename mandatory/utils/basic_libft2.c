@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 08:09:54 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 09:11:07 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 09:12:54 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,3 @@ int	ft_isalpha(int c)
 	isupper = c >= 'A' && c <= 'Z';
 	return (islower || isupper);
 }
-
-int	is_alpha_num(int c)
-{
-	return (ft_isalpha(c) || ft_isdigit(c) || c == '_');
-}
-
-bool	is_str_alpha_num(char *str)
-{
-	if (!str)
-		return (false);
-	while (*str)
-	{
-		if (!ft_isalpha(*str) && !ft_isdigit(*str) && !(*str == '_'))
-			return (false);
-		str++;
-	}
-	return (true);
-}
-

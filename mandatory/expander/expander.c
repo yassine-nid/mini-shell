@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 08:44:02 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/20 10:46:12 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 08:24:23 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	stage_1_cleanup(t_mini *mini, t_token *token, int lvl, int start_i)
 		remove_first_expanded(token);
 }
 
-void	expand_token(t_mini *mini, t_token *token)
+void	expand_token(t_mini *mini, t_token *token, bool exp_star)
 {
 	int	index;
 	int	dollar_loca;
@@ -112,6 +112,8 @@ void	expand_token(t_mini *mini, t_token *token)
 	stage_1_cleanup(mini, token, 0, 0);
 	flag_empty_tokens(token);
 	remove_empty_quotes(token);
-	m_expand_star(mini, token);
+	if (exp_star)
+		m_expand_star(mini, token);
 	m_remove_quotes(mini, token);
+	restore_token(token);
 }

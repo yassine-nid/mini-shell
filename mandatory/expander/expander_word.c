@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:15:41 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/20 10:45:36 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 08:10:22 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ void	m_expand_word(t_mini *mini, t_token *token, int index)
 	while (env && env->value && env->value[ind])
 	{
 		n_w[ind + index] = env->value[ind];
+		if (n_w[ind + index] == '\'' || n_w[ind + index] == '\"')
+			n_w[ind + index] = (unsigned char)(n_w[ind + index] + 100);
 		ind++;
 	}
 	ind += index - 1;
 	while (n_w[++ind])
 		n_w[ind] = token->word[index++ + skip_l + 1];
-	free(token->word);
-	token->word = n_w;
+	(free(token->word), token->word = n_w);
 }
 
 void	m_expand_status(t_mini *mini, t_token *token, int index)

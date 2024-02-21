@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
+#    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/02/20 15:35:10 by ynidkouc         ###   ########.fr        #
+#    Updated: 2024/02/21 09:13:40 by yzirri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,11 +50,12 @@ TREE_DIR = ./mandatory/build_tree/
 
 ########################################
 #	-Utils
-UTILS_FILES = utils_lst.c basic_libft.c str_utils.c basic_libft2.c ft_split.c ft_split_utiles.c
+UTILS_FILES = utils_lst.c basic_libft.c str_utils.c basic_libft2.c ft_split.c ft_split_utiles.c \
+				basic_libft_3.c
 UTILS_DIR = ./mandatory/utils/
 
 #	-Cleanup
-CLEANUP_FILES = cleanup.c
+CLEANUP_FILES = cleanup.c cleanup_2.c
 CLEANUP_DIR = ./mandatory/cleanup/
 
 #	-Env Handler

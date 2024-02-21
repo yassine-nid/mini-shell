@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:21:52 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 07:29:48 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 08:15:21 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,19 @@ bool	is_inside_quote(char *str, int index, t_quote_type type)
 		ind++;
 	}
 	return (false);
+}
+
+void	restore_token(t_token *token)
+{
+	int	index;
+
+	index = 0;
+	while (token->word[index])
+	{
+		if ((unsigned char)(token->word[index] - 100) == '\'')
+			token->word[index] = (unsigned char)(token->word[index] - 100);
+		if ((unsigned char)(token->word[index] - 100) == '\"')
+			token->word[index] = (unsigned char)(token->word[index] - 100);
+		index++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 08:29:04 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 09:52:43 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 08:27:19 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int	export_add(t_env *env, char *new_val, bool append)
 		return (errno);
 	free(env->value);
 	free(new_val);
-	env->value = tmp;	
+	env->value = tmp;
 	return (0);
 }

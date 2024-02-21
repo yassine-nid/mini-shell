@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   signals_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:08:16 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/20 16:24:18 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 08:39:52 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 void	handle_signal(int sig, t_mini *mini)
-{	
-	static t_mini *m_mini;
-	
+{
+	static t_mini	*m_mini;
+
 	if (sig == 269)
 	{
 		m_mini = mini;

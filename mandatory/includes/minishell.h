@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/20 15:44:44 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 09:27:34 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ typedef struct s_mini
 	char			*m_pwd;
 }	t_mini;
 
-// 1: ##################### Main #####################
-// void	listen_to_signals(t_mini *mini);
+#pragma region Main
 void	handle_signal(int sig, t_mini *mini);
+#pragma endregion
 
-// 2: ################## Expander ####################
-void	expand_token(t_mini *mini, t_token *token);
+#pragma region Expander
+void	expand_token(t_mini *mini, t_token *token, bool exp_star);
 void	m_expand_word(t_mini *mini, t_token *token, int index);
 void	m_remove_quotes(t_mini *mini, t_token *token);
 void	m_expand_status(t_mini *mini, t_token *token, int index);
@@ -114,39 +114,47 @@ bool	is_match(t_mini *mini, char *token, char *dir);
 void	remove_empty_quotes(t_token *token);
 void	flag_empty_tokens(t_token *token);
 bool	is_inside_quote(char *str, int index, t_quote_type type);
+void	restore_token(t_token *token);
+#pragma endregion
 
-// 3: ############### Syntax Checker #################
+#pragma region  Syntax Checker
 int		syntax_checker(t_token *token, t_mini *mini);
 int		syntax_checker_hd(t_token *token, t_mini *mini);
 int		check_word(t_token *token);
 int		check_quoate(t_token *token);
 int		syntax_par(t_token *token);
+#pragma endregion
 
-// 4: ################ Commands reader ###############
+#pragma region Commands Reader
 void	read_commands(t_mini *mini);
+#pragma endregion
 
-// 5: ################ tokenizer #####################
+#pragma region Tokenizer
 void	create_tokens(t_mini *mini, char *line);
 int		delimiter_check(char *line, t_type *delimiter, bool quotes);
 t_token	*token_new(t_mini *mini, t_type type, char *word);
 void	token_add_back(t_mini *mini, t_token *new);
 void	remove_token(t_mini *mini, t_token *token);
 void	token_insert(t_token *new, t_token *preveus, int level);
+void	token_cleanup(t_mini *mini);
+#pragma endregion
 
-// 6: ################## Env Handler #################
+#pragma region Env Handler
 void	handle_env(t_mini *mini, char *env[]);
 void	handle_defaults(t_mini *mini);
 int		create_env(t_mini *mini, char *key, char *value, bool exported);
 char	*env_atoi(char *old);
 char	*get_key(char *str, bool *malloc_failed);
 char	*get_value(char *str, bool *malloc_failed);
+#pragma endregion
 
-// ############ Build Tree #############
+#pragma region Build Tree
 t_tree	*build_tree(t_token **token, t_mini *mini, int level);
 t_tree	*creat_node(t_token *token, t_mini *mini, int level);
 int		get_priority(t_token *token);
+#pragma endregion
 
-// ############### Execution ################
+#pragma region Execution
 int		execute_tree(t_mini *mini);
 int		execute_type(t_mini *mini, t_tree *root, int level);
 int		execute_cmd(t_mini *mini, t_tree *root, int level);
@@ -158,16 +166,19 @@ void	reset_std_in_out(t_mini *mini);
 char	**get_paths(t_mini *mini);
 bool	is_builtin(t_token *token);
 int		excute_builtin(t_mini *mini, t_token *token, int level);
+char	**get_cmd(t_mini *mini, t_token *token);
+#pragma endregion
 
-// ############### Redirection ################
+#pragma region Redirection
 int		red_in(t_token *token, t_mini *mini);
 int		red_out(t_token *token, t_mini *mini);
 int		red_ap_out(t_token *token, t_mini *mini);
 int		here_doc(t_token *token, t_mini *mini);
 int		red_handle(t_token *token, t_mini *mini);
 void	read_here_doc(t_token *token, t_mini *mini);
+#pragma endregion
 
-// ################### Builtins ##################
+#pragma region  Builtins
 int		do_echo(t_token *token);
 int		do_export(t_mini *mini, t_token *token);
 int		do_unset(t_mini *mini, t_token *token);
@@ -181,13 +192,9 @@ char	*get_combined_path(t_mini *mini, t_token *token);
 int		update_pwd(t_mini *mini, bool is_init);
 int		m_print_dir_error(bool is_pwd);;
 int		export_add(t_env *env, char *new_val, bool append);
+#pragma endregion
 
-// ############################################### MODified ####################################
-int		do_echo(t_token *token);
-int		do_export(t_mini *mini, t_token *token);
-
-
-// ############ Utils ###########
+#pragma region Utils
 void	ft_lstadd_back(t_env **lst, t_env *new);
 t_env	*ft_lstnew(void *key, void *value);
 void	ft_lstiter(t_env *lst, void (*f)());
@@ -197,8 +204,6 @@ char	*ft_itoa(int n);
 int		ft_putstr_fd(char *s, int fd);
 bool    ft_strcmp_no_case(const char *s1, const char *s2);
 bool	is_str_alpha_num(char *str);
-
-// ############# Basic Libft ###############
 void	ft_bzero(void *s, size_t n);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
@@ -212,8 +217,10 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strchr(const char *s, int c);
+bool	is_space(char c);
+#pragma endregion
 
-// ############ Cleanup #############
+#pragma region Cleanup
 void	clean_exit(t_mini *mini, char *error, int code);
 void	cleanup_exit(t_mini *mini, int code);
 void	env_cleanup(t_mini *mini);
@@ -222,17 +229,6 @@ void	free_tree(t_tree **tree);
 void	ft_free(char **p);
 void	ft_err(int err_nb, char *str, int ext, char **to_free);
 void	clean_exit_two(t_mini *mini, char **error, int code);
+#pragma endregion
 
-// ########### Commands reader ###########
-void	read_commands(t_mini *mini);
-bool	is_space(char c);
-void	token_cleanup(t_mini *mini);
-
-
-
-
-
-
-
-char	**get_cmd(t_mini *mini, t_token *token);
 #endif

@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:39:37 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/18 14:35:36 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 08:24:59 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	count_words(t_mini *mini, t_token *token)
 			break ;
 		if (!token->is_empty)
 			nb_words++;
-		expand_token(mini, token);
+		expand_token(mini, token, true);
 		token = token->next;
 	}
 	return (nb_words);

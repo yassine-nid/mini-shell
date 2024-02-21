@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:34:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 09:34:23 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 08:32:58 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_protect(long old, long new, int *isnegative)
 		return (0);
 }
 
-char	*skip_begining(char *str, int *isnegative)
+static char	*skip_begining(char *str, int *isnegative)
 {
 	while (*str && is_space(*str))
 		str++;
@@ -34,6 +34,22 @@ char	*skip_begining(char *str, int *isnegative)
 	else if (*str == '+')
 		str++;
 	return (str);
+}
+
+static char	get_nbr(char **str, bool *error, int *isnegative, long *nb)
+{
+	while (**str && ft_isdigit(**str))
+	{
+		*error = true;
+		if (ft_protect(*nb, *nb * 10 + **str - '0', isnegative) == 1)
+			return ((unsigned char)255);
+		else if (ft_protect(*nb, *nb * 10 + **str - '0', isnegative) == 2)
+			return ((unsigned char)255);
+		*error = false;
+		*nb = *nb * 10 + **str - '0';
+		*str = *str + 1;
+	}
+	return (0);
 }
 
 char	ft_atoi(t_token *token, bool *error)
@@ -53,17 +69,8 @@ char	ft_atoi(t_token *token, bool *error)
 		*error = true;
 		return ((char)255);
 	}
-	while (*str && ft_isdigit(*str))
-	{
-		*error = true;
-		if (ft_protect(nb, nb * 10 + *str - '0', &isnegative) == 1)
-			return ((unsigned char)255);
-		else if (ft_protect(nb, nb * 10 + *str - '0', &isnegative) == 2)
-			return ((unsigned char)255);
-		*error = false;
-		nb = nb * 10 + *str - '0';
-		str++;
-	}
+	if (get_nbr(&str, error, &isnegative, &nb) != 0)
+		return ((char)255);
 	if (*str && !ft_isdigit(*str))
 	{
 		*error = true;
@@ -75,7 +82,7 @@ char	ft_atoi(t_token *token, bool *error)
 int	do_exit(t_mini *mini, t_token *token, int lvl)
 {
 	unsigned char	exit_code;
-	bool	error;
+	bool			error;
 
 	if (token)
 		token = token->next;
