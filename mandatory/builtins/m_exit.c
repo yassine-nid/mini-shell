@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:34:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 11:36:25 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:09:43 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	do_exit(t_mini *mini, t_token *token, int lvl)
 			return (ft_putstr_fd("minishell: exit: too many arguments\n", 2)
 				, 1);
 	}
-	if (lvl == 0)
+	if (lvl == 0 && !error)
 		ft_putstr_fd("exit\n", 1);
 	cleanup_exit(mini, exit_code);
 	return (exit_code);

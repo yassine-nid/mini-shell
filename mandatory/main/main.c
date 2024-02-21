@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:59 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 11:13:55 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:49:06 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,12 @@ static void	init_vars(t_mini *mini)
 	mini->env = NULL;
 	mini->m_pwd = NULL;
 	mini->tree = NULL;
-	mini->std_in = dup(STDIN_FILENO);
-	if (mini->std_in == -1)
-		clean_exit(mini, NULL, errno);
-	mini->std_out = dup(STDOUT_FILENO);
-	if (mini->std_out == -1)
-		clean_exit(mini, NULL, errno);
-	mini->sig_int_recived = 0;
 	mini->hd_index = 0;
 	mini->hd_signal = 0;
+	mini->std_in = dup(STDIN_FILENO);
+	mini->std_out = dup(STDOUT_FILENO);
+	if (mini->std_in == -1 || mini->std_out == -1)
+		clean_exit(mini, NULL, errno);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -38,7 +35,7 @@ int	main(int argc, char *argv[], char *envp[])
 	(void)argv;
 	rl_catch_signals = 0;
 	if (!isatty(0))
-		return (printf("tty is required\n"), errno);
+		return (write(1, "tty is required\n", 16), 1);
 	init_vars(&mini);
 	handle_env(&mini, envp);
 	read_commands(&mini);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 11:34:20 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:21:04 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,12 @@ typedef struct s_mini
 	int				std_out;
 	int				std_in;
 	int				exit_status;
-	int				sig_int_recived;
 	char			*m_pwd;
 }	t_mini;
 
 # pragma region Main
 
-void	handle_signal(int sig, t_mini *mini);
+void	handle_signal(int sig);
 # pragma endregion
 
 # pragma region Expander

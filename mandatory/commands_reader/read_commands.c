@@ -6,15 +6,14 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 08:38:18 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 12:13:36 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	listen_to_signales(t_mini *mini)
+static void	listen_to_signales(void)
 {
-	handle_signal(269, mini);
 	signal(SIGQUIT, (void (*)(int))handle_signal);
 	signal(SIGINT, (void (*)(int))handle_signal);
 }
@@ -50,7 +49,7 @@ void	read_commands(t_mini *mini)
 
 	while (1)
 	{
-		listen_to_signales(mini);
+		listen_to_signales();
 		line = readline("minishell:$ ");
 		if (line == NULL)
 		{

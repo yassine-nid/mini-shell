@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 08:44:02 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 08:24:23 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 12:02:23 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	remove_first_expanded(t_token *token)
 	free(temp);
 }
 
-static void	stage_1_cleanup(t_mini *mini, t_token *token, int lvl, int start_i)
+static void	token_separate(t_mini *mini, t_token *token, int lvl, int start_i)
 {
 	t_token	*new_token;
 	int		end_index;
@@ -109,7 +109,7 @@ void	expand_token(t_mini *mini, t_token *token, bool exp_star)
 		}
 		index++;
 	}
-	stage_1_cleanup(mini, token, 0, 0);
+	token_separate(mini, token, 0, 0);
 	flag_empty_tokens(token);
 	remove_empty_quotes(token);
 	if (exp_star)
