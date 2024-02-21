@@ -6,21 +6,21 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 09:40:42 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 07:28:34 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 09:35:27 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	signal_here_doc(int sig , t_mini *mini)
+void	signal_here_doc(int sig, t_mini *mini)
 {
-	static t_mini *m_mini;
+	static t_mini	*m_mini;
 
 	if (sig == 99292)
 		m_mini = mini;
 	if (sig == SIGINT)
 	{
-		// write(1, "\n", 1);
+		write(1, "\n", 1);
 		m_mini->hd_signal = 1;
 		close (0);
 	}
@@ -66,8 +66,6 @@ static int	read_here_d(char *limiter, t_mini *mini)
 	close(fd);
 	return (0);
 }
-
-
 
 void	read_here_doc(t_token *token, t_mini *mini)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redaractions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:04:51 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 08:24:54 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 09:41:13 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	ambiguous_red(t_token *token, char *old)
 {
 	if (!(!token->do_expand && token->next && !token->next->do_expand)
-	&& !(token->was_env && token->next && token->next->was_env)
-	&& !(token->was_env && token->is_empty))
+		&& !(token->was_env && token->next && token->next->was_env)
+		&& !(token->was_env && token->is_empty))
 	{
 		return (0);
 	}
@@ -31,7 +31,6 @@ int	red_in(t_token *token, t_mini *mini)
 	char	*file;
 	int		fd;
 	char	*old;
-	
 
 	token = token->next;
 	old = ft_strdup(token->word);
@@ -74,7 +73,6 @@ int	red_out(t_token *token, t_mini *mini)
 	close(fd);
 	return (0);
 }
-
 
 int	red_ap_out(t_token *token, t_mini *mini)
 {
