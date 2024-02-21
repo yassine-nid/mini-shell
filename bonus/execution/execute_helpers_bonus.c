@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_tree.c                                     :+:      :+:    :+:   */
+/*   execute_helpers_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 10:01:02 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 16:13:44 by ynidkouc         ###   ########.fr       */
+/*   Created: 2024/02/13 08:32:39 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/02/21 15:32:52 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/minishell_bonus.h"
 
-int	execute_type(t_mini *mini, t_tree *root, int level)
+char	**get_paths(t_mini *mini)
 {
-	if (!root)
-		return (0);
-	else if (root->node->type == PIPE)
-		return (execute_pip(mini, root, level + 1));
-	else
-		return (execute_cmd(mini, root, level));
-}
+	t_env	*env;
+	char	*result;
 
-int	execute_tree(t_mini *mini)
-{
-	t_tree	*root;
-
-	root = mini->tree;
-	mini->exit_status = execute_type(mini, root, 0);
-	return (mini->exit_status);
+	env = *mini->env;
+	result = NULL;
+	while (env)
+	{
+		if (ft_strcmp(env->key, "PATH"))
+		{
+			result = env->value;
+			break ;
+		}
+		env = env->next;
+	}
+	return (ft_split(result, ':'));
 }

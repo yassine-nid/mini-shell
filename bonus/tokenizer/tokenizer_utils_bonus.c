@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_utils.c                                  :+:      :+:    :+:   */
+/*   tokenizer_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:05:55 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 15:49:39 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:36:31 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/minishell_bonus.h"
 
 t_token	*token_new(t_mini *mini, t_type type, char *word)
 {
@@ -65,8 +65,12 @@ int	delimiter_check(char *line, t_type *delimiter, bool quotes)
 		return (1);
 	if (is_space(*line))
 		return (1);
+	if (*line == '|' && line[1] == '|')
+		return (*delimiter = OR, 2);
 	if (*line == '|')
 		return (*delimiter = PIPE, 1);
+	if (*line == '&' && line[1] == '&')
+		return (*delimiter = AND, 2);
 	if (*line == '<' && line[1] == '<')
 		return (*delimiter = H_DOC, 2);
 	if (*line == '<')

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_tree.c                                       :+:      :+:    :+:   */
+/*   build_tree_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:00:21 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 15:43:33 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:31:14 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/minishell_bonus.h"
 
 static void	add_to_tree(t_tree **root, t_tree *new_node)
 {
@@ -69,7 +69,8 @@ t_tree	*build_tree(t_token **token, t_mini *mini, int level)
 		}
 		else if ((*token)->type == CLOSE_PAR)
 			break ;
-		else if ((*token)->type == PIPE)
+		else if ((*token)->type == OR || (*token)->type == AND
+			|| (*token)->type == PIPE)
 			creat_add_node((*token), &root, mini, level);
 		else if (condition((*token)))
 			creat_add_node((*token), &root, mini, level);

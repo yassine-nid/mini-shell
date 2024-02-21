@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   excution_utils.c                                   :+:      :+:    :+:   */
+/*   excution_utils_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:53:40 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 16:19:12 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:18:43 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/minishell_bonus.h"
 
 bool	is_builtin(t_token *token)
 {
@@ -31,14 +31,39 @@ bool	is_builtin(t_token *token)
 	return (false);
 }
 
+static bool	is_valid_export(t_token *token)
+{
+	int	index;
+
+	index = 0;
+	if (!is_alpha_num(token->word[index]))
+		return (false);
+	while (token->word[index])
+	{
+		if (token->word[index] == '+' && token->word[index + 1] == '=')
+			break ;
+		if (token->word[index] == '=')
+			break ;
+		if (!is_alpha_num(token->word[index]))
+			return (false);
+		index = index + 1;
+	}
+	if (token->word[0] <= '9' && token->word[0] >= '0')
+		return (false);
+	return (true);
+}
+
 static void	expand_for_builtins(t_mini *mini, t_token *token)
 {
+	bool	is_export;
+
+	is_export = ft_strcmp(token->word, "export");
 	while (1)
 	{
 		token = get_next_arg(token);
 		if (!token)
 			break ;
-		expand_token(mini, token);
+		expand_token(mini, token, !(is_export && is_valid_export(token)));
 		token = token->next;
 	}
 }

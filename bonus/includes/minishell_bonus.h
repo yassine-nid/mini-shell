@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 16:21:06 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:35:32 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MINISHELL_BONUS_H
+# define MINISHELL_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -58,6 +58,8 @@ typedef enum s_type
 {
 	WORD,
 	PIPE,
+	OR,
+	AND,
 	OPEN_PAR,
 	CLOSE_PAR,
 	RED_IN,
@@ -105,10 +107,13 @@ void	handle_signal(int sig);
 
 # pragma region Expander
 
-void	expand_token(t_mini *mini, t_token *token);
+void	expand_token(t_mini *mini, t_token *token, bool exp_star);
 void	m_expand_word(t_mini *mini, t_token *token, int index);
 void	m_remove_quotes(t_mini *mini, t_token *token);
 void	m_expand_status(t_mini *mini, t_token *token, int index);
+void	m_expand_star(t_mini *mini, t_token *token);
+void	star_sort(int lvl, t_token *token);
+bool	is_match(t_mini *mini, char *token, char *dir);
 void	remove_empty_quotes(t_token *token);
 void	flag_empty_tokens(t_token *token);
 bool	is_inside_quote(char *str, int index, t_quote_type type);
@@ -162,6 +167,8 @@ int		get_priority(t_token *token);
 int		execute_tree(t_mini *mini);
 int		execute_type(t_mini *mini, t_tree *root, int level);
 int		execute_cmd(t_mini *mini, t_tree *root, int level);
+int		execute_and(t_mini *mini, t_tree *root, int level);
+int		execute_or(t_mini *mini, t_tree *root, int level);
 int		execute_pip(t_mini *mini, t_tree *root, int level);
 void	child_exe(t_tree *root, t_mini *mini);
 void	reset_std_in_out(t_mini *mini);

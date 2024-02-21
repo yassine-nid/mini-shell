@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_tree.c                                     :+:      :+:    :+:   */
+/*   signals_handler_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 10:01:02 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 16:13:44 by ynidkouc         ###   ########.fr       */
+/*   Created: 2024/01/12 16:08:16 by yzirri            #+#    #+#             */
+/*   Updated: 2024/02/21 15:36:05 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/minishell_bonus.h"
 
-int	execute_type(t_mini *mini, t_tree *root, int level)
+void	handle_signal(int sig)
 {
-	if (!root)
-		return (0);
-	else if (root->node->type == PIPE)
-		return (execute_pip(mini, root, level + 1));
-	else
-		return (execute_cmd(mini, root, level));
-}
-
-int	execute_tree(t_mini *mini)
-{
-	t_tree	*root;
-
-	root = mini->tree;
-	mini->exit_status = execute_type(mini, root, 0);
-	return (mini->exit_status);
+	if (waitpid(-1, NULL, WNOHANG) == 0)
+		return ;
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }

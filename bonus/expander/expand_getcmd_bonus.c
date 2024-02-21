@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_getcmd.c                                    :+:      :+:    :+:   */
+/*   expand_getcmd_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:39:37 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 16:19:31 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:33:18 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/minishell_bonus.h"
 
 static int	count_words(t_mini *mini, t_token *token)
 {
@@ -24,7 +24,7 @@ static int	count_words(t_mini *mini, t_token *token)
 			break ;
 		if (!token->is_empty)
 			nb_words++;
-		expand_token(mini, token);
+		expand_token(mini, token, true);
 		token = token->next;
 	}
 	return (nb_words);

@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:59:31 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/20 15:34:35 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:48:25 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static int	check_pipe_or(t_token *token)
 {
 	if (token->preveus == NULL)
 		return (1);
-	if (token->next == NULL || token->next->type == AND
-		|| token->next->type == OR || token->next->type == PIPE
+	if (token->next == NULL || token->next->type == PIPE
 		|| token->next->type == CLOSE_PAR)
 		return (1);
 	return (0);
@@ -25,8 +24,7 @@ static int	check_pipe_or(t_token *token)
 
 static int	check_open_par(t_token *token)
 {
-	if (token->next == NULL || token->next->type == AND
-		|| token->next->type == OR || token->next->type == PIPE
+	if (token->next == NULL || token->next->type == PIPE
 		|| token->next->type == CLOSE_PAR)
 		return (1);
 	return (0);
@@ -65,7 +63,7 @@ int	syntax_checker(t_token *token, t_mini *mini)
 		return (1);
 	while (token)
 	{
-		if (token->type == PIPE || token->type == OR || token->type == AND)
+		if (token->type == PIPE)
 			is_valid = check_pipe_or(token);
 		else if (token->type == OPEN_PAR)
 			is_valid = check_open_par(token);

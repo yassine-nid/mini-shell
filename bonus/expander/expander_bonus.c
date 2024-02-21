@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   expander_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 08:44:02 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 16:17:17 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:33:35 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/minishell_bonus.h"
 
 static bool	expand_varriable(t_mini *mini, t_token *token, int index, int *d_in)
 {
@@ -91,7 +91,7 @@ static void	token_separate(t_mini *mini, t_token *token, int lvl, int start_i)
 		remove_first_expanded(token);
 }
 
-void	expand_token(t_mini *mini, t_token *token)
+void	expand_token(t_mini *mini, t_token *token, bool exp_star)
 {
 	int	index;
 	int	dollar_loca;
@@ -112,6 +112,8 @@ void	expand_token(t_mini *mini, t_token *token)
 	token_separate(mini, token, 0, 0);
 	flag_empty_tokens(token);
 	remove_empty_quotes(token);
+	if (exp_star)
+		m_expand_star(mini, token);
 	m_remove_quotes(mini, token);
 	restore_token(token);
 }

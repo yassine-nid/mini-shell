@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redaractions.c                                     :+:      :+:    :+:   */
+/*   redaractions_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:04:51 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 16:19:28 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:02:57 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/minishell_bonus.h"
 
 int	ambiguous_red(t_token *token, char *old)
 {
@@ -34,7 +34,7 @@ int	red_in(t_token *token, t_mini *mini)
 
 	token = token->next;
 	old = ft_strdup(token->word);
-	expand_token(mini, token);
+	expand_token(mini, token, true);
 	if (ambiguous_red(token, old))
 		return (free(old), 1);
 	file = token->word;
@@ -58,7 +58,7 @@ int	red_out(t_token *token, t_mini *mini)
 
 	token = token->next;
 	old = ft_strdup(token->word);
-	expand_token(mini, token);
+	expand_token(mini, token, true);
 	if (ambiguous_red(token, old))
 		return (free(old), 1);
 	file = token->word;
@@ -82,7 +82,7 @@ int	red_ap_out(t_token *token, t_mini *mini)
 
 	token = token->next;
 	old = ft_strdup(token->word);
-	expand_token(mini, token);
+	expand_token(mini, token, true);
 	if (ambiguous_red(token, old))
 		return (free(old), 1);
 	file = token->word;
@@ -104,7 +104,8 @@ int	red_handle(t_token *token, t_mini *mini)
 	int	status;
 
 	status = 0;
-	while (token && token->type != PIPE && token->type != OPEN_PAR
+	while (token && token->type != AND && token->type != OR
+		&& token->type != PIPE && token->type != OPEN_PAR
 		&& token->type != CLOSE_PAR)
 	{
 		if (token->type == RED_IN)

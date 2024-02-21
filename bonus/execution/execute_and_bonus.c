@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_tree.c                                     :+:      :+:    :+:   */
+/*   execute_and_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 10:01:02 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 16:13:44 by ynidkouc         ###   ########.fr       */
+/*   Created: 2024/01/23 13:22:48 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/02/21 15:32:44 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/minishell_bonus.h"
 
-int	execute_type(t_mini *mini, t_tree *root, int level)
+int	execute_and(t_mini *mini, t_tree *root, int level)
 {
-	if (!root)
-		return (0);
-	else if (root->node->type == PIPE)
-		return (execute_pip(mini, root, level + 1));
-	else
-		return (execute_cmd(mini, root, level));
-}
+	int	status;
 
-int	execute_tree(t_mini *mini)
-{
-	t_tree	*root;
-
-	root = mini->tree;
-	mini->exit_status = execute_type(mini, root, 0);
-	return (mini->exit_status);
+	status = execute_type(mini, root->left, level);
+	if (!status)
+		status = execute_type(mini, root->right, level);
+	return (status);
 }
