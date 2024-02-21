@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 15:13:54 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:02:17 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,26 @@ void	read_commands(t_mini *mini)
 		{
 			create_tokens(mini, line);
 			add_history(line);
-			if (syntax_checker(*mini->token))
+			if (syntax_checker(*mini->token, mini))
 			{
 				printf("minishell: Syntax Error\n");
 				mini->exit_status = 258;
+				syntax_checker_hd(*mini->token, mini);
 			}
 			else
 			{
+				syntax_checker_hd(*mini->token, mini);
+				mini->hd_index = 0;
 				t_token *tokens = *mini->token;
 				mini->tree = build_tree(mini->token, mini, 0);
 				*mini->token = tokens;
-				execute_tree(mini);
+				if (!mini->hd_signal)
+					execute_tree(mini);
 				free_tree(&mini->tree);
 			}
 		}
 		free(line);
 		line = NULL;
+		mini->hd_signal = 0;
 	}
 }

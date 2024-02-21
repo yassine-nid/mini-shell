@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
+#    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/02/18 11:29:25 by yzirri           ###   ########.fr        #
+#    Updated: 2024/02/20 15:35:10 by ynidkouc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ EXPAND_FILES = expand_star.c expander_quotes.c expander_word.c expander.c expand
 EXPAND_DIR = ./mandatory/expander/
 
 #	-Syntax Checker
-SYNTAX_FILES = syntax_checker.c syntax_checker_helper.c
+SYNTAX_FILES = syntax_checker.c syntax_checker_helper.c syntax_hd.c
 SYNTAX_DIR = ./mandatory/syntax_checker/
 
 #	-Commands_Reader

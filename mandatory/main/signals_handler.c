@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:08:16 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/20 10:10:37 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:24:18 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	handle_signal(int sig, t_mini *mini)
 		return ;
 	if (sig == SIGINT)
 	{
-		write(1, ">>>\n", 1);
+		write(1, "\n", 1);
 		m_mini->sig_int_recived = 0;
 		rl_replace_line("", 1);
 		rl_on_new_line();

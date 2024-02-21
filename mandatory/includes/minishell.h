@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 10:59:46 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:44:44 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_mini
 	t_env			**env;
 	t_token			**token;
 	t_tree			*tree;
+	int				hd_index;
+	int				hd_signal;
 	int				std_out;
 	int				std_in;
 	int				exit_status;
@@ -114,7 +116,8 @@ void	flag_empty_tokens(t_token *token);
 bool	is_inside_quote(char *str, int index, t_quote_type type);
 
 // 3: ############### Syntax Checker #################
-int		syntax_checker(t_token *token);
+int		syntax_checker(t_token *token, t_mini *mini);
+int		syntax_checker_hd(t_token *token, t_mini *mini);
 int		check_word(t_token *token);
 int		check_quoate(t_token *token);
 int		syntax_par(t_token *token);
@@ -154,7 +157,7 @@ void	child_exe(t_tree *root, t_mini *mini);
 void	reset_std_in_out(t_mini *mini);
 char	**get_paths(t_mini *mini);
 bool	is_builtin(t_token *token);
-int	excute_builtin(t_mini *mini, t_token *token, int level);
+int		excute_builtin(t_mini *mini, t_token *token, int level);
 
 // ############### Redirection ################
 int		red_in(t_token *token, t_mini *mini);
@@ -162,6 +165,7 @@ int		red_out(t_token *token, t_mini *mini);
 int		red_ap_out(t_token *token, t_mini *mini);
 int		here_doc(t_token *token, t_mini *mini);
 int		red_handle(t_token *token, t_mini *mini);
+void	read_here_doc(t_token *token, t_mini *mini);
 
 // ################### Builtins ##################
 int		do_echo(t_token *token);

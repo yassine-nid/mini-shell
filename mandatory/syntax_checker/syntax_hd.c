@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_checker.c                                   :+:      :+:    :+:   */
+/*   syntax_hd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/13 14:59:31 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/20 15:34:35 by ynidkouc         ###   ########.fr       */
+/*   Created: 2024/02/20 15:33:09 by ynidkouc          #+#    #+#             */
+/*   Updated: 2024/02/20 15:34:05 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,18 @@ static int	check_close_par(t_token *token)
 	return (0);
 }
 
-static int	check_all_red(t_token *token, t_mini *mini)
+static int	check_all_red_h(t_token *token, t_mini *mini)
 {
-	(void)mini;
 	if (token->next == NULL)
 		return (1);
 	if (token->next->type != WORD)
 		return (1);
+	if (token->type == H_DOC)
+		read_here_doc(token, mini);
 	return (0);
 }
 
-int	syntax_checker(t_token *token, t_mini *mini)
+int	syntax_checker_hd(t_token *token, t_mini *mini)
 {
 	int	is_valid;
 
@@ -72,7 +73,7 @@ int	syntax_checker(t_token *token, t_mini *mini)
 		else if (token->type == CLOSE_PAR)
 			is_valid = check_close_par(token);
 		else if (token->type != WORD)
-			is_valid = check_all_red(token, mini);
+			is_valid = check_all_red_h(token, mini);
 		else if (token->type == WORD)
 			is_valid = check_word(token);
 		if (is_valid)

@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:59 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 11:02:17 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:06:33 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	init_vars(t_mini *mini)
 	mini->token = NULL;
 	mini->env = NULL;
 	mini->m_pwd = NULL;
+	mini->tree = NULL;
 	mini->std_in = dup(STDIN_FILENO);
 	if (mini->std_in == -1)
 		clean_exit(mini, NULL, errno);
@@ -25,6 +26,8 @@ static void	init_vars(t_mini *mini)
 	if (mini->std_out == -1)
 		clean_exit(mini, NULL, errno);
 	mini->sig_int_recived = 0;
+	mini->hd_index = 0;
+	mini->hd_signal = 0;
 }
 
 int	main(int argc, char *argv[], char *envp[])
