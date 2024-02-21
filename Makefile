@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+         #
+#    By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 15:26:27 by yzirri            #+#    #+#              #
-#    Updated: 2024/02/21 09:13:40 by yzirri           ###   ########.fr        #
+#    Updated: 2024/02/21 11:37:33 by ynidkouc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ OBJ_DIR = ./objects/
 # Mandatory Varriables
 # -----------------------------------------
 #	-Varriables
+
 NAME = minishell
 
 #	-Header
@@ -79,57 +80,67 @@ OBJ_FILES = $(SRC_FILES:.c=.o) $(UTILS_FILES:.c=.o) $(CLEANUP_FILES:.c=.o) \
 			$(TOKENIZER_FILES:.c=.o) $(TREE_FILES:.c=.o) $(EXECUTION_FILES:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
+PRJ_MAME = "\n"\
+	"███╗   ███╗ █████╗ ███████╗██╗      █████╗ ██████╗  █████╗       ███████╗██╗  ██╗███████╗██╗     ██╗     \n"\
+	"████╗ ████║██╔══██╗╚════██║██║     ██╔══██╗██╔══██╗██╔══██╗      ██╔════╝██║  ██║██╔════╝██║     ██║     \n"\
+	"██╔████╔██║███████║    ██╔╝██║     ███████║██████╔╝███████║█████╗███████╗███████║█████╗  ██║     ██║     \n"\
+	"██║╚██╔╝██║██╔══██║   ██╔╝ ██║     ██╔══██║██╔══██╗██╔══██║╚════╝╚════██║██╔══██║██╔══╝  ██║     ██║     \n"\
+	"██║ ╚═╝ ██║██║  ██║   ██║  ███████╗██║  ██║██████╔╝██║  ██║      ███████║██║  ██║███████╗███████╗███████╗\n"\
+	"╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝  ╚══════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝      ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n"\
+
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -lreadline -L ~/.brew/opt/readline/lib -o $(NAME)
+	@echo $(PRJ_MAME)
+	@$(CC) $(CFLAGS) $(OBJ) -lreadline -L ~/.brew/opt/readline/lib -o $(NAME)
 
 # -----------------------------------------
 #	Mandatory Creating Object Files
 # -----------------------------------------
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(UTILS_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(CLEANUP_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(READER_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(SYNTAX_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(ENV_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(BUILTIN_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(EXPAND_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(TOKENIZER_DIR)%.c $(HEAD_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(TREE_DIR)%.c $(TREE_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 $(OBJ_DIR)%.o: $(EXECUTION_DIR)%.c $(EXECUTION_DIR)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ~/.brew/opt/readline/include
 
 clean:
 	@rm -f $(OBJ)

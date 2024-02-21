@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:20:03 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/19 10:56:33 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:53:27 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	child_exe(t_tree *root, t_mini *mini)
 	char	**env;
 
 	cmd = get_cmd(mini, root->node);
-	if (!cmd)
+	if (!cmd || !*cmd)
 		cleanup_exit(mini, 0);
 	if (ft_strchr(*cmd, '/'))
 		cmd_path = *cmd;

@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:04:51 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 09:41:13 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:37:38 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	red_in(t_token *token, t_mini *mini)
 	file = token->word;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (ft_err(-1, file, 0, NULL), errno);
+		return (ft_err(-1, file, 0, NULL), 1);
 	if (dup2(fd, STDIN_FILENO) == -1)
 	{
 		close(fd);
@@ -64,7 +64,7 @@ int	red_out(t_token *token, t_mini *mini)
 	file = token->word;
 	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
-		return (ft_err(-1, file, 0, NULL), errno);
+		return (ft_err(-1, file, 0, NULL), 1);
 	if (dup2(fd, STDOUT_FILENO) == -1)
 	{
 		close(fd);
@@ -89,7 +89,7 @@ int	red_ap_out(t_token *token, t_mini *mini)
 	free(old);
 	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
-		return (ft_err(-1, file, 0, NULL), errno);
+		return (ft_err(-1, file, 0, NULL), 1);
 	if (dup2(fd, STDOUT_FILENO) == -1)
 	{
 		close(fd);

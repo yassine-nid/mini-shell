@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:15:44 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/13 14:50:36 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 10:30:44 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	do_cd(t_mini *mini, t_token *token)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		perror(mpath);
-		return (errno);
+		return (1);
 	}
 	if (update_pwd(mini, false) != 0)
 		path_append(mini, mpath, 0, 0);
