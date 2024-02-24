@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_exe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:20:03 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 10:53:27 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:17:36 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,17 @@ static int	count_env(t_mini *mini)
 	i = 0;
 	while (env)
 	{
+		if (env->is_exported && env->value)
+			i++;
 		env = env->next;
-		i++;
 	}
 	return (i);
 }
 
-static char	**get_env(t_mini *mini)
+static char	**get_env(t_mini *mini, int i, char *tmp)
 {
 	t_env	*env;
 	char	**env_s;
-	char	*tmp;
-	int		i;
 
 	i = count_env(mini);
 	if (!i)
@@ -85,11 +84,14 @@ static char	**get_env(t_mini *mini)
 	i = 0;
 	while (env)
 	{
-		env_s[i] = ft_strjoin(env->key, "=");
-		tmp = ft_strjoin(env_s[i], env->value);
-		free(env_s[i]);
-		env_s[i] = tmp;
-		i++;
+		if (env->is_exported && env->value)
+		{
+			env_s[i] = ft_strjoin(env->key, "=");
+			tmp = ft_strjoin(env_s[i], env->value);
+			free(env_s[i]);
+			env_s[i] = tmp;
+			i++;
+		}
 		env = env->next;
 	}
 	env_s[i] = NULL;
@@ -117,7 +119,7 @@ void	child_exe(t_tree *root, t_mini *mini)
 		ft_putstr_fd(": command not found\n", 2);
 		cleanup_exit(mini, 127);
 	}
-	env = get_env(mini);
+	env = get_env(mini, 0, NULL);
 	execve(cmd_path, cmd, env);
 	ft_free(env);
 	clean_exit_two(mini, cmd, errno);

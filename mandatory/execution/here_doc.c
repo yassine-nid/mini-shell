@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 09:40:42 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 09:35:27 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:06:20 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,45 +42,56 @@ char	*create_hd_name_file(t_mini *mini)
 	return (file_name);
 }
 
-static int	read_here_d(char *limiter, t_mini *mini)
+static int	read_here_d(char *limiter, t_mini *mini, bool do_expand)
 {
-	char	*line;
 	char	*file;
-	int		fd;
 
-	signal(SIGINT, (void (*)(int))signal_here_doc);
-	signal(SIGQUIT, (void (*)(int))signal_here_doc);
 	file = create_hd_name_file(mini);
-	fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0)
+	mini->hd_fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (mini->hd_fd < 0)
 		return (free(file), ft_err(-1, ".minishell_tmp", 0, NULL), errno);
 	free(file);
-	line = readline("> ");
-	while (line && !ft_strcmp(line, limiter))
+	clean_t_token(mini);
+	mini->herdoc_t = token_new(mini, WORD, NULL);
+	mini->herdoc_t->word = readline("> ");
+	while (mini->herdoc_t->word && !ft_strcmp(mini->herdoc_t->word, limiter))
 	{
-		ft_putendl_fd(line, fd);
-		free(line);
-		line = readline("> ");
+		if (do_expand)
+			expand_token(mini, mini->herdoc_t);
+		ft_putendl_fd(mini->herdoc_t->word, mini->hd_fd);
+		free(mini->herdoc_t->word);
+		mini->herdoc_t->word = readline("> ");
 	}
-	free(line);
-	close(fd);
-	return (0);
+	clean_t_token(mini);
+	return (close(mini->hd_fd), mini->hd_fd = -1, 0);
 }
 
 void	read_here_doc(t_token *token, t_mini *mini)
 {
 	int		fd;
 	char	*limiter;
+	int		index;
+	bool	do_expand;
 
 	signal_here_doc(99292, mini);
+	signal(SIGINT, (void (*)(int))signal_here_doc);
+	signal(SIGQUIT, (void (*)(int))signal_here_doc);
 	if (mini->hd_signal)
 		return ;
 	token = token->next;
+	do_expand = true;
+	index = 0;
+	while (token && token->word[index])
+	{
+		if (token->word[index] == '\'' || token->word[index] == '\"')
+			do_expand = false;
+		index++;
+	}
 	m_remove_quotes(mini, token);
 	limiter = token->word;
 	if (dup2(mini->std_in, STDIN_FILENO) == -1)
 		clean_exit(mini, NULL, errno);
-	fd = read_here_d(limiter, mini);
+	fd = read_here_d(limiter, mini, do_expand);
 	reset_std_in_out(mini);
 }
 

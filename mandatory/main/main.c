@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:59 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 11:49:06 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 17:05:10 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	init_vars(t_mini *mini)
 	mini->tree = NULL;
 	mini->hd_index = 0;
 	mini->hd_signal = 0;
+	mini->hd_fd = -1;
+	mini->herdoc_t = NULL;
 	mini->std_in = dup(STDIN_FILENO);
 	mini->std_out = dup(STDOUT_FILENO);
 	if (mini->std_in == -1 || mini->std_out == -1)

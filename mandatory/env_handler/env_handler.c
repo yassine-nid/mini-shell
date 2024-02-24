@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:19:35 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/19 08:53:28 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/24 13:13:47 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	init_envs(t_mini *mini, char *env[])
 
 void	handle_env(t_mini *mini, char *env[])
 {
+	mini->env = NULL;
 	if (env == NULL)
 		clean_exit(mini, "Invalid env", 24);
 	init_envs(mini, env);

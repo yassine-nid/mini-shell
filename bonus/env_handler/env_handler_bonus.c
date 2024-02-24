@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_handler_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:19:35 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 15:32:27 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:13:57 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	init_envs(t_mini *mini, char *env[])
 
 void	handle_env(t_mini *mini, char *env[])
 {
+	mini->env = NULL;
 	if (env == NULL)
 		clean_exit(mini, "Invalid env", 24);
 	init_envs(mini, env);

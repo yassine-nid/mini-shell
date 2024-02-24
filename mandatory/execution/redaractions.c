@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redaractions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:04:51 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 16:19:28 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:23:19 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	red_in(t_token *token, t_mini *mini)
 	if (ambiguous_red(token, old))
 		return (free(old), 1);
 	file = token->word;
+	free(old);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (ft_err(-1, file, 0, NULL), 1);
@@ -62,6 +63,7 @@ int	red_out(t_token *token, t_mini *mini)
 	if (ambiguous_red(token, old))
 		return (free(old), 1);
 	file = token->word;
+	free(old);
 	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 		return (ft_err(-1, file, 0, NULL), 1);

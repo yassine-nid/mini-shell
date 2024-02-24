@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 08:29:04 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 15:31:28 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:10:00 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,50 @@ int	export_add(t_env *env, char *new_val, bool append)
 	free(new_val);
 	env->value = tmp;
 	return (0);
+}
+
+static int	m_cmp(const char *s1, const char *s2)
+{
+	if (s1 && !s2)
+		return (1);
+	else if (!s1 && s2)
+		return (-1);
+	else if (!s1 && !s2)
+		return (0);
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
+
+void	env_sort(t_mini *mini, char *old_key, char *old_val)
+{
+	t_env	*env;
+	int		index;
+	bool	old_exported;
+
+	env = *mini->env;
+	while (env)
+	{
+		index = 0;
+		if (env->next && m_cmp(env->key, env->next->key) > 0)
+		{
+			old_key = env->key;
+			old_val = env->value;
+			old_exported = env->is_exported;
+			env->key = env->next->key;
+			env->value = env->next->value;
+			env->is_exported = env->next->is_exported;
+			env->next->key = old_key;
+			env->next->value = old_val;
+			env->next->is_exported = old_exported;
+			env = *mini->env;
+			continue ;
+		}
+		env = env->next;
+	}
 }

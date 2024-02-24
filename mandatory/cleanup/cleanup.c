@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:11:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 08:34:39 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/21 17:07:37 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	token_cleanup(t_mini *mini)
 	t_token	*token;
 	t_token	*tmp;
 
+	clean_t_token(mini);
 	if (!mini || !mini->token)
 		return ;
 	token = *mini->token;
@@ -84,5 +85,7 @@ void	clean_exit(t_mini *mini, char *error, int code)
 		ft_putstr_fd(error, 2);
 	close(mini->std_in);
 	close(mini->std_out);
+	if (mini->hd_fd != -1)
+		close(mini->hd_fd);
 	exit(code);
 }

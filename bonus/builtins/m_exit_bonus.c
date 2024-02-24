@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_exit_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:34:28 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 15:31:42 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:00:56 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	get_nbr(char **str, bool *error, int *isnegative, long *nb)
 	return (0);
 }
 
-char	ft_atoi(t_token *token, bool *error)
+static char	ft_atoi(t_mini *mini, t_token *token, bool *error)
 {
 	int		isnegative;
 	long	nb;
@@ -60,7 +60,7 @@ char	ft_atoi(t_token *token, bool *error)
 
 	*error = false;
 	if (!token || !token->word)
-		return (0);
+		return (mini->exit_status);
 	nb = 0;
 	isnegative = 1;
 	str = skip_begining(token->word, &isnegative);
@@ -88,7 +88,7 @@ int	do_exit(t_mini *mini, t_token *token, int lvl)
 		token = token->next;
 	token = get_next_arg(token);
 	error = false;
-	exit_code = ft_atoi(token, &error);
+	exit_code = ft_atoi(mini, token, &error);
 	if (error || (token && get_next_arg(token->next)))
 	{
 		if (error)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_unset_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:24:44 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 15:31:56 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:12:19 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	unset_single(t_mini *mini, char *word)
 		if (ft_strcmp(word, env->key))
 		{
 			if (*mini->env == env)
-				mini->env = &env->next;
+				*mini->env = env->next;
 			else if (perv)
 				perv->next = env->next;
 			free(env->value);

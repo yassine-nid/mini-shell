@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 15:35:32 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:11:49 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,12 @@ typedef struct s_mini
 	t_tree			*tree;
 	int				hd_index;
 	int				hd_signal;
+	int				hd_fd;
 	int				std_out;
 	int				std_in;
 	int				exit_status;
 	char			*m_pwd;
+	t_token			*herdoc_t;
 }	t_mini;
 
 # pragma region Main
@@ -203,6 +205,7 @@ char	*get_combined_path(t_mini *mini, t_token *token);
 int		update_pwd(t_mini *mini, bool is_init);
 int		m_print_dir_error(bool is_pwd);;
 int		export_add(t_env *env, char *new_val, bool append);
+void	env_sort(t_mini *mini, char *old_key, char *old_val);
 # pragma endregion
 
 # pragma region Utils
@@ -242,6 +245,7 @@ void	free_tree(t_tree **tree);
 void	ft_free(char **p);
 void	ft_err(int err_nb, char *str, int ext, char **to_free);
 void	clean_exit_two(t_mini *mini, char **error, int code);
+void	clean_t_token(t_mini *mini);
 # pragma endregion
 
 #endif

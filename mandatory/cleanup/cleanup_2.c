@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 08:33:43 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 11:10:36 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:01:11 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,15 @@ void	ft_err(int err_nb, char *str, int ext, char **to_free)
 			ft_free(to_free);
 		if (ext)
 			exit(ext);
+	}
+}
+
+void	clean_t_token(t_mini *mini)
+{
+	if (mini->herdoc_t)
+	{
+		free(mini->herdoc_t->word);
+		free(mini->herdoc_t);
+		mini->herdoc_t = NULL;
 	}
 }

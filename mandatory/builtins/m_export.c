@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:22:01 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/14 10:33:40 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/24 13:08:04 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	print_export(t_mini *mini)
 
 	if (write(1, "", 0) < 0)
 		return (errno);
+	env_sort(mini, NULL, NULL);
 	env = *mini->env;
 	while (env)
 	{
