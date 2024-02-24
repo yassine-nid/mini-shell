@@ -6,7 +6,7 @@
 /*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 09:40:42 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/24 21:38:10 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 21:48:53 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*create_hd_name_file(t_mini *mini, t_token *token)
 	char	*index;
 	char	*file_name;
 
-	index = ft_itoa((int) token % 100000);
+	index = ft_itoa((int) token % 1000000);
 	if (!index)
 		clean_exit(mini, NULL, errno);
 	file_name = ft_strjoin("/tmp/.mini_tmp_", index);
