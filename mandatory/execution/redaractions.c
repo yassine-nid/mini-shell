@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:04:51 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 17:23:19 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/24 22:17:02 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	red_in(t_token *token, t_mini *mini)
 
 	token = token->next;
 	old = ft_strdup(token->word);
-	expand_token(mini, token);
+	expand_token(mini, token, true);
 	if (ambiguous_red(token, old))
 		return (free(old), 1);
 	file = token->word;
@@ -59,7 +59,7 @@ int	red_out(t_token *token, t_mini *mini)
 
 	token = token->next;
 	old = ft_strdup(token->word);
-	expand_token(mini, token);
+	expand_token(mini, token, true);
 	if (ambiguous_red(token, old))
 		return (free(old), 1);
 	file = token->word;
@@ -84,7 +84,7 @@ int	red_ap_out(t_token *token, t_mini *mini)
 
 	token = token->next;
 	old = ft_strdup(token->word);
-	expand_token(mini, token);
+	expand_token(mini, token, true);
 	if (ambiguous_red(token, old))
 		return (free(old), 1);
 	file = token->word;

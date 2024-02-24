@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 09:40:42 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/24 21:53:29 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:13:40 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ static int	read_here_d(char *lm, t_mini *mini, bool do_expand, t_token *token)
 	while (mini->herdoc_t->word && !ft_strcmp(mini->herdoc_t->word, lm))
 	{
 		if (do_expand)
-			expand_token(mini, mini->herdoc_t, true);
+		{
+			herdoc_incrypt(mini->herdoc_t->word);
+			expand_token(mini, mini->herdoc_t, true, false);
+		}
 		ft_putendl_fd(mini->herdoc_t->word, mini->hd_fd);
 		free(mini->herdoc_t->word);
 		mini->herdoc_t->word = readline("> ");

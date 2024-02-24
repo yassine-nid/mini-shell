@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:02:39 by yzirri            #+#    #+#             */
-/*   Updated: 2024/01/15 14:17:41 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/24 22:14:14 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ void	ft_lstiter(t_env *lst, void (*f)())
 	{
 		f(lst, index);
 		lst = lst->next;
+		index++;
+	}
+}
+
+void	herdoc_incrypt(char *str)
+{
+	int	index;
+
+	index = 0;
+	while (str && str[index])
+	{
+		if (str[index] == '\'' || str[index] == '\"')
+			str[index] = (unsigned char)(str[index] + 100);
 		index++;
 	}
 }

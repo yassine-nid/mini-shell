@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 08:44:02 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 15:33:35 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:10:22 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	token_separate(t_mini *mini, t_token *token, int lvl, int start_i)
 		remove_first_expanded(token);
 }
 
-void	expand_token(t_mini *mini, t_token *token, bool exp_star)
+void	expand_token(t_mini *mini, t_token *token, bool exp_star, bool seperte)
 {
 	int	index;
 	int	dollar_loca;
@@ -109,7 +109,8 @@ void	expand_token(t_mini *mini, t_token *token, bool exp_star)
 		}
 		index++;
 	}
-	token_separate(mini, token, 0, 0);
+	if (seperte)
+		token_separate(mini, token, 0, 0);
 	flag_empty_tokens(token);
 	remove_empty_quotes(token);
 	if (exp_star)

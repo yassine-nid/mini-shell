@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lst_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:02:39 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 15:37:12 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:13:22 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ void	ft_lstiter(t_env *lst, void (*f)())
 	{
 		f(lst, index);
 		lst = lst->next;
+		index++;
+	}
+}
+
+void	herdoc_incrypt(char *str)
+{
+	int	index;
+
+	index = 0;
+	while (str && str[index])
+	{
+		if (str[index] == '\'' || str[index] == '\"')
+			str[index] = (unsigned char)(str[index] + 100);
 		index++;
 	}
 }

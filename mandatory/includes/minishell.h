@@ -6,7 +6,7 @@
 /*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:47:23 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/24 13:07:20 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/24 22:16:40 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	handle_signal(int sig);
 
 # pragma region Expander
 
-void	expand_token(t_mini *mini, t_token *token);
+void	expand_token(t_mini *mini, t_token *token, bool seper);
 void	m_expand_word(t_mini *mini, t_token *token, int index);
 void	m_remove_quotes(t_mini *mini, t_token *token);
 void	m_expand_status(t_mini *mini, t_token *token, int index);
@@ -203,6 +203,7 @@ void	env_sort(t_mini *mini, char *old_key, char *old_val);
 
 # pragma region Utils
 
+void	herdoc_incrypt(char *str);
 void	ft_lstadd_back(t_env **lst, t_env *new);
 t_env	*ft_lstnew(void *key, void *value);
 void	ft_lstiter(t_env *lst, void (*f)());

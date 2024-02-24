@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:23:59 by ynidkouc          #+#    #+#             */
-/*   Updated: 2024/02/21 16:07:07 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:18:42 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	execute_exev(t_tree *root, t_mini *mini)
 		else if (state == 3)
 		{
 			reset_terminal(mini);
-			write(1, "Quit: 3\n", 10);
+			write(1, "Quit: 3\n", 8);
 		}
 		return (state + 128);
 	}

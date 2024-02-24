@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_getcmd_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:39:37 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 15:33:18 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:11:51 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	count_words(t_mini *mini, t_token *token)
 			break ;
 		if (!token->is_empty)
 			nb_words++;
-		expand_token(mini, token, true);
+		expand_token(mini, token, true, true);
 		token = token->next;
 	}
 	return (nb_words);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excution_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:53:40 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/21 16:19:12 by ynidkouc         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:17:13 by yzirri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	expand_for_builtins(t_mini *mini, t_token *token)
 		token = get_next_arg(token);
 		if (!token)
 			break ;
-		expand_token(mini, token);
+		expand_token(mini, token, true);
 		token = token->next;
 	}
 }
