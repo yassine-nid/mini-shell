@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzirri <yzirri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ynidkouc <ynidkouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:32:53 by yzirri            #+#    #+#             */
-/*   Updated: 2024/02/24 12:52:00 by yzirri           ###   ########.fr       */
+/*   Updated: 2024/02/24 16:06:21 by ynidkouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void	handle_line(t_mini *mini, char *line)
 		*mini->token = tokens;
 		if (!mini->hd_signal)
 			execute_tree(mini);
+		else
+			mini->exit_status = 1;
 		free_tree(&mini->tree);
 	}
 }
@@ -54,7 +56,7 @@ void	read_commands(t_mini *mini)
 		if (line == NULL)
 		{
 			write(1, "exit\n", 5);
-			cleanup_exit(mini, 0);
+			cleanup_exit(mini, mini->exit_status);
 		}
 		token_cleanup(mini);
 		if (line[0] != '\0')
